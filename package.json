@@ -7,6 +7,14 @@
     "angular",
     "multi-root ready"
   ],
+  "author": {
+    "name": "iamcco",
+    "email": "ooiss@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamcco/coc-angular"
+  },
   "engines": {
     "coc": "^0.0.62"
   },
@@ -24,6 +32,11 @@
           "type": "boolean",
           "default": false,
           "description": "enable coc-angular service debug"
+        },
+        "angular.trace.server": {
+          "type": "boolean",
+          "default": false,
+          "description": "enable angular language server trace log?"
         }
       }
     }
@@ -48,7 +61,6 @@
   },
   "devDependencies": {
     "@types/node": "^10.12.10",
-    "coc.nvim": "^0.0.62",
-    "vscode": "^1.1.22"
+    "coc.nvim": "^0.0.62"
   }
 }

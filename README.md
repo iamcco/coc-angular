@@ -1,6 +1,16 @@
 # Angular Language Service
 
-![demo](https://github.com/angular/vscode-ng-language-service/raw/master/client/R67RcGftRS.gif)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service)
+
+An angular language service coc extension for (neo)vim 💖
+
+## Install
+
+``` vim
+:CocInstall coc-angular
+```
+
+![image](https://user-images.githubusercontent.com/5492542/55223095-6826b180-5248-11e9-8bca-f0528c456850.png)
 
 ## Using
 
