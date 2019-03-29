@@ -1,0 +1,54 @@
+{
+  "name": "coc-angular",
+  "description": "Editor services for Angular templates",
+  "version": "0.0.1",
+  "keywords": [
+    "coc.nvim",
+    "angular",
+    "multi-root ready"
+  ],
+  "engines": {
+    "coc": "^0.0.62"
+  },
+  "activationEvents": [
+    "onLanguage:ng-template",
+    "onLanguage:html",
+    "onLanguage:typescript"
+  ],
+  "main": "./lib/client/index.js",
+  "contributes": {
+    "configuration": {
+      "title": "angular configuration",
+      "properties": {
+        "angular.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "enable coc-angular service debug"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "watch": "tsc -w -p ./"
+  },
+  "dependencies": {
+    "@angular/compiler": "7.1.1",
+    "@angular/compiler-cli": "7.1.1",
+    "@angular/core": "7.1.1",
+    "@angular/language-service": "7.1.1",
+    "@types/node": "^10.12.10",
+    "rxjs": "^6.3.3",
+    "tslib": "^1.9.3",
+    "typescript": "3.1.6",
+    "vsce": "^1.53.2",
+    "vscode-jsonrpc": "^4.0.0",
+    "vscode-languageserver": "^5.1.0",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.10",
+    "coc.nvim": "^0.0.62",
+    "vscode": "^1.1.22"
+  }
+}
