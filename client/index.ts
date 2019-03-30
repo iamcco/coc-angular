@@ -15,7 +15,7 @@ export function activate(context: ExtensionContext) {
   const config = workspace.getConfiguration('angular')
   const isEnableDebug = config.get<boolean>('angular.debug')
   // The server is implemented in node
-  let serverModule = context.asAbsolutePath(path.join('lib', 'server', 'server.js'));
+  let serverModule = require.resolve('angular-lsp-service')
 
   // If the extension is launched in debug mode then the debug server options are used
   // Otherwise the run options are used
