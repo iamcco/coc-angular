@@ -23,7 +23,7 @@
     "onLanguage:html",
     "onLanguage:typescript"
   ],
-  "main": "./lib/client/index.js",
+  "main": "./lib/index.js",
   "contributes": {
     "configuration": {
       "title": "angular configuration",
@@ -45,22 +45,13 @@
     "build": "tsc -p ./",
     "watch": "tsc -w -p ./"
   },
-  "dependencies": {
-    "@angular/compiler": "7.1.1",
-    "@angular/compiler-cli": "7.1.1",
-    "@angular/core": "7.1.1",
-    "@angular/language-service": "7.1.1",
-    "@types/node": "^10.12.10",
-    "rxjs": "^6.3.3",
-    "tslib": "^1.9.3",
-    "typescript": "3.1.6",
-    "vsce": "^1.53.2",
-    "vscode-jsonrpc": "^4.0.0",
-    "vscode-languageserver": "^5.1.0",
-    "zone.js": "^0.8.26"
-  },
   "devDependencies": {
     "@types/node": "^10.12.10",
-    "coc.nvim": "^0.0.62"
+    "coc.nvim": "^0.0.62",
+    "typescript": "3.1.6",
+    "vsce": "^1.53.2"
+  },
+  "dependencies": {
+    "angular-lsp-service": "^0.0.1"
   }
 }
