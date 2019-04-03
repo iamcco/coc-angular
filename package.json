@@ -54,6 +54,6 @@
   "dependencies": {
     "vscode-jsonrpc": "^4.0.0",
     "vscode-languageserver": "^5.1.0",
-    "angular-lsp-service": "^0.0.4"
+    "angular-lsp-service": "^0.0.5"
   }
 }
