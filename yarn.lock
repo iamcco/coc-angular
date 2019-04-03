@@ -49,9 +49,9 @@ abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
-angular-lsp-service@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.0.2.tgz#4027c08216a75a1697bec3a0be3ea879e6996249"
+angular-lsp-service@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.0.4.tgz#9da6264b0fea7e72bc7554fb686a1bb5ae2f4f8d"
   dependencies:
     "@angular/compiler" "7.1.1"
     "@angular/compiler-cli" "7.1.1"
