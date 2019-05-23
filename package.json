@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "keywords": [
     "coc.nvim",
     "angular",
@@ -46,14 +46,11 @@
     "watch": "tsc -w -p ./"
   },
   "devDependencies": {
-    "@types/node": "^10.12.10",
-    "coc.nvim": "^0.0.62",
-    "typescript": "3.1.6",
-    "vsce": "^1.53.2"
+    "@types/node": "^10.9.4",
+    "typescript": "~3.4.2",
+    "coc.nvim": "^0.0.62"
   },
   "dependencies": {
-    "vscode-jsonrpc": "^4.0.0",
-    "vscode-languageserver": "^5.1.0",
-    "angular-lsp-service": "^0.0.5"
+    "angular-lsp-service": "^0.0.6"
   }
 }

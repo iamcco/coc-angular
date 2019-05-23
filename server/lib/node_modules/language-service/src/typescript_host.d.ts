@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 /// <amd-module name="@angular/language-service/src/typescript_host" />
-import { CompileMetadataResolver, HtmlParser, InterpolationConfig, NgAnalyzedModules, ParseTreeResult, ResourceLoader } from '@angular/compiler';
+import { CompileMetadataResolver, HtmlParser, NgAnalyzedModules, ParseTreeResult, ResourceLoader } from '@angular/compiler';
 import * as ts from 'typescript';
 import { Declarations, LanguageService, LanguageServiceHost, TemplateSource, TemplateSources } from './types';
 /**
@@ -20,7 +20,7 @@ export declare function createLanguageServiceFromTypescript(host: ts.LanguageSer
  * syntactically incorrect templates.
  */
 export declare class DummyHtmlParser extends HtmlParser {
-    parse(source: string, url: string, parseExpansionForms?: boolean, interpolationConfig?: InterpolationConfig): ParseTreeResult;
+    parse(): ParseTreeResult;
 }
 /**
  * Avoid loading resources in the language servcie by using a dummy loader.
