@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "keywords": [
     "coc.nvim",
     "angular",
@@ -51,6 +51,6 @@
     "coc.nvim": "^0.0.62"
   },
   "dependencies": {
-    "angular-lsp-service": "^0.0.8"
+    "angular-lsp-service": "^0.0.9"
   }
 }

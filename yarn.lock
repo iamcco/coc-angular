@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@angular/compiler-cli@8.0.0-rc.4":
-  version "8.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-8.0.0-rc.4.tgz#daa462fa34e34840f24b966bead255edaee04f67"
-  integrity sha512-0aqViKowTzE5A/FximXDzd7CGCfhP2CNQD3rxO5Zd/US56AtrQQV4tsCR49ewzJ1IXCxGEJ51TqQfaI9TzFNVg==
+"@angular/compiler-cli@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-8.0.0.tgz#b53ebb5accc34a68bf7a63d16130ca7c568f8a51"
+  integrity sha512-Z0U0Ih8A7V3J1gq7AXnXbrGAD2ERmz7JbREJJRHDWiUNxIqGQiV3Odo1V8FL5n/cKvLwSYM2Ubvk10gb0+3njA==
   dependencies:
     canonical-path "1.0.0"
     chokidar "^2.1.1"
@@ -19,17 +19,17 @@
     tslib "^1.9.0"
     yargs "13.1.0"
 
-"@angular/compiler@8.0.0-rc.4":
-  version "8.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-8.0.0-rc.4.tgz#858db4e953147dde9fc64875bf0c9a7673539331"
-  integrity sha512-D9qT0iTFiXZBKyRJewipORRsaYfSQmY+0L1uqhdtHe8NA/71r+HrAn9WxwlcLBL7i3wYw3IAUiKGlOGnXY0Snw==
+"@angular/compiler@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-8.0.0.tgz#302c987737e1473db3a113ff70fbbb315aa41b58"
+  integrity sha512-4rKsVFMNykF83tPL1VE1+j9kZ3cWHUsLOAB/VqmF64EcR/GsbjKog2v23rSso5kqUtPiVq/FWGYllW6qMdxtJA==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@8.0.0-rc.4":
-  version "8.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-8.0.0-rc.4.tgz#9ab4f95a2d2d09e602c776516a0db1a49281c84b"
-  integrity sha512-RtPYeMpHbbCVAvyRNWBx+s1FTEntwVFYcmZZ21CUIVq26O2oE43VzGKo5PQSdruSW5KTkAPoRo100Qlhwfz4mA==
+"@angular/core@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-8.0.0.tgz#bf7a582b818e9181d830219907470e2b865ba32f"
+  integrity sha512-mrkP1PTzqCmZGLYll+TDyawLXHzi+FcRPqSuRxCmDMthUUE93SLXT2yISDkx9aMPtFKgFr6KfrIkKuCz16BP/g==
   dependencies:
     tslib "^1.9.0"
 
@@ -48,14 +48,14 @@ abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
-angular-lsp-service@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.0.8.tgz#c665fbbbf53c8df54d08294368fea1ad015d4b5f"
-  integrity sha512-RQ8yIv/3c7wORiUqTGmpQcHyq8qK/8hBy68s92ia1SLvPGMiu6kBmaqs/37EyG4E+R6JtQq3lAm4Gt9+omCJ2A==
+angular-lsp-service@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.0.9.tgz#2374c1d82c1c78c21ff4ff537cda783f37a36bd1"
+  integrity sha512-+GT0sldYKyeZmRQodEMJfzFb+7bUPaY1Aj2NSpbRtKjttJOgaGIKYrxzUVguEslIJoj/T6K0lj/gA155AXreig==
   dependencies:
-    "@angular/compiler" "8.0.0-rc.4"
-    "@angular/compiler-cli" "8.0.0-rc.4"
-    "@angular/core" "8.0.0-rc.4"
+    "@angular/compiler" "8.0.0"
+    "@angular/compiler-cli" "8.0.0"
+    "@angular/core" "8.0.0"
     rxjs "^6.4.0"
     typescript "~3.4.0"
     vscode-languageserver "^5.1.0"
