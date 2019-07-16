@@ -1,6 +1,6 @@
 {
   "name": "angular-lsp-service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "coc-angular lsp service",
   "main": "./lib/server.js",
   "author": "iamcco",
@@ -13,9 +13,9 @@
     "build": "tsc -p ./"
   },
   "dependencies": {
-    "@angular/compiler": "8.1.0",
-    "@angular/compiler-cli": "8.1.0",
-    "@angular/core": "8.1.0",
+    "@angular/compiler": "8.1.1",
+    "@angular/compiler-cli": "8.1.1",
+    "@angular/core": "8.1.1",
     "rxjs": "^6.4.0",
     "typescript": "~3.4.0",
     "vscode-languageserver": "^5.1.0"
