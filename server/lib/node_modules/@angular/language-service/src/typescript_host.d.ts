@@ -8,6 +8,7 @@
 /// <amd-module name="@angular/language-service/src/typescript_host" />
 import { CompileMetadataResolver, HtmlParser, NgAnalyzedModules, ParseTreeResult, ResourceLoader } from '@angular/compiler';
 import * as ts from 'typescript';
+import { AstResult, TemplateInfo } from './common';
 import { Declarations, LanguageService, LanguageServiceHost, TemplateSource, TemplateSources } from './types';
 /**
  * Create a `LanguageServiceHost`
@@ -51,13 +52,11 @@ export declare class TypeScriptServiceHost implements LanguageServiceHost {
     private lastProgram;
     private modulesOutOfDate;
     private analyzedModules;
-    private service;
     private fileToComponent;
     private templateReferences;
     private collectedErrors;
     private fileVersions;
     constructor(host: ts.LanguageServiceHost, tsService: ts.LanguageService);
-    setSite(service: LanguageService): void;
     /**
      * Angular LanguageServiceHost implementation
      */
@@ -93,4 +92,6 @@ export declare class TypeScriptServiceHost implements LanguageServiceHost {
     private getDeclarationFromNode;
     private stringOf;
     private findNode;
+    getTemplateAstAtPosition(fileName: string, position: number): TemplateInfo | undefined;
+    getTemplateAst(template: TemplateSource, contextFile: string): AstResult;
 }
