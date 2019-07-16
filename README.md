@@ -22,7 +22,7 @@ and external templates including:
 * Quick info
 * Go to definition
 
-This extension uses `@angular/language-service@8.0.x` and `typescript@3.4.x`.
+This extension uses `@angular/language-service@8.1.x` and `typescript@3.4.x`.
 
 ### Buy Me A Coffee ☕️
 
