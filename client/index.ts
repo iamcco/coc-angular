@@ -13,19 +13,24 @@ export function activate(context: ExtensionContext) {
   const config = workspace.getConfiguration('angular')
   const isEnableDebug = config.get<boolean>('angular.debug')
   // The server is implemented in node
-  let serverModule = require.resolve('angular-lsp-service')
+  const serverModule = require.resolve('angular-lsp-service')
+
+  const options = {
+    module: serverModule,
+    transport: TransportKind.ipc,
+    options: {
+      env: {
+        // Force TypeScript to use the non-polling version of the file watchers.
+        TSC_NONPOLLING_WATCHER: true,
+      },
+    },
+  };
 
   // If the extension is launched in debug mode then the debug server options are used
   // Otherwise the run options are used
   let serverOptions: ServerOptions = {
-    run : {
-      module: serverModule,
-      transport: TransportKind.ipc
-    },
-    debug: {
-      module: serverModule,
-      transport: TransportKind.ipc
-    }
+    run : options,
+    debug: options
   }
 
   // The debug options for the server
@@ -39,7 +44,7 @@ export function activate(context: ExtensionContext) {
   }
 
   // Options to control the language client
-  let clientOptions: LanguageClientOptions = {
+  const clientOptions: LanguageClientOptions = {
     // Register the server for Angular templates
     documentSelector: ['ng-template', 'html', 'typescript'],
 
