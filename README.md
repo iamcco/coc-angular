@@ -1,6 +1,6 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.800.0-rc.0
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.802.2
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -22,7 +22,7 @@ and external templates including:
 * Quick info
 * Go to definition
 
-This extension uses `@angular/language-service@8.1.x` and `typescript@3.4.x`.
+This extension uses `@angular/language-service@8.2.x` and `typescript@3.5.x`.
 
 ### Buy Me A Coffee ☕️
 

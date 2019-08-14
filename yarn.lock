@@ -2,9 +2,10 @@
 # yarn lockfile v1
 
 
-"@angular/compiler-cli@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-8.1.1.tgz#46fc72a0e62632ba56626ca8e093fb29dc796c4f"
+"@angular/compiler-cli@8.2.2":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-8.2.2.tgz#0b66157233ca2581e6b478a42150bea992230c8b"
+  integrity sha512-lEfWykViorBom4iWeZusoH4yAFkalyys/k9sI2qiTSVaH6TyowXbnfTMGfFQXKFydxI9sE86cCPoaRcR6fQcKQ==
   dependencies:
     canonical-path "1.0.0"
     chokidar "^2.1.1"
@@ -13,20 +14,21 @@
     magic-string "^0.25.0"
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
-    shelljs "^0.8.1"
     source-map "^0.6.1"
     tslib "^1.9.0"
     yargs "13.1.0"
 
-"@angular/compiler@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-8.1.1.tgz#0006ff26f69246b811418ed08a71ff6d5b9c6fbc"
+"@angular/compiler@8.2.2":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-8.2.2.tgz#382a0ef9abcbc02ca1426945754d263ce9b49073"
+  integrity sha512-UMhOQehvi9u1r4u48Ymwm5JkdOKoH057ImCo26WqRqJBUgA44xwmUsKLFAmSg1JqzWCO5pBDyA3RaNBscD8ZzQ==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-8.1.1.tgz#888fb879906a46429ddac7163fe25915ce5a7f8f"
+"@angular/core@8.2.2":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-8.2.2.tgz#f99a21461fbd6506f73493d5ae8d7027f5a0751a"
+  integrity sha512-glQLJ3aeRWHMsN9QeJYis5FVdCg0lBU2s9aFX9i6WvVLscYmGoBk+TKsgO+uJjLnUUgsCPLRLzde02IJEQzCGw==
   dependencies:
     tslib "^1.9.0"
 
@@ -44,17 +46,17 @@ abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
-angular-lsp-service@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.1.3.tgz#519590f6891280ed59349a463957e1e9e02cee6c"
-  integrity sha512-Tw2yGJgLI1dJ5DTJFJyy8x/OZq2LQkgr30NWicOJXP+ogbArTWv5Z52KQAtq7J7Lthhr0kuNcHw+MBsclyBkng==
+angular-lsp-service@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.2.0.tgz#7ef39c77570f2ed05be0e7b957bb6b312218e306"
+  integrity sha512-0XtqDnjH4IdXebdKryZ6KP3ZWMo6+V/Vo7lALiu/QBSOgpcBKY+NWidORvMgFsxCgZ+HywxYUB74Rt6FaNZaWg==
   dependencies:
-    "@angular/compiler" "8.1.1"
-    "@angular/compiler-cli" "8.1.1"
-    "@angular/core" "8.1.1"
+    "@angular/compiler" "8.2.2"
+    "@angular/compiler-cli" "8.2.2"
+    "@angular/core" "8.2.2"
     rxjs "^6.4.0"
-    typescript "~3.4.0"
-    vscode-languageserver "^5.1.0"
+    typescript "~3.5.3"
+    vscode-languageserver "^5.2.1"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -546,7 +548,7 @@ glob-parent@^3.1.0:
     is-glob "^3.1.0"
     path-dirname "^1.0.0"
 
-glob@^7.0.0, glob@^7.1.3:
+glob@^7.1.3:
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.3.tgz#3960832d3f1574108342dafd3a67b332c0969df1"
   dependencies:
@@ -641,10 +643,6 @@ ini@~1.3.0:
 int64-buffer@^0.1.9:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/int64-buffer/-/int64-buffer-0.1.10.tgz#277b228a87d95ad777d07c13832022406a473423"
-
-interpret@^1.0.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
 
 invert-kv@^2.0.0:
   version "2.0.0"
@@ -1145,10 +1143,6 @@ path-key@^2.0.0, path-key@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
-path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -1193,12 +1187,6 @@ readdirp@^2.2.1:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
-rechoir@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
-  dependencies:
-    resolve "^1.1.6"
-
 reflect-metadata@^0.1.2:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
@@ -1233,12 +1221,6 @@ require-main-filename@^2.0.0:
 resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
-
-resolve@^1.1.6:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.10.0.tgz#3bdaaeaf45cc07f375656dfd2e54ed0810b101ba"
-  dependencies:
-    path-parse "^1.0.6"
 
 ret@~0.1.10:
   version "0.1.15"
@@ -1321,14 +1303,6 @@ shebang-command@^1.2.0:
 shebang-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
-
-shelljs@^0.8.1:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.3.tgz#a7f3319520ebf09ee81275b2368adb286659b097"
-  dependencies:
-    glob "^7.0.0"
-    interpret "^1.0.0"
-    rechoir "^0.6.2"
 
 signal-exit@^3.0.0:
   version "3.0.2"
@@ -1523,9 +1497,10 @@ tunnel@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/tunnel/-/tunnel-0.0.6.tgz#72f1314b34a5b192db012324df2cc587ca47f92c"
 
-typescript@~3.4.0, typescript@~3.4.2:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.5.tgz#2d2618d10bb566572b8d7aad5180d84257d70a99"
+typescript@~3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
+  integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
 
 union-value@^1.0.0:
   version "1.0.0"
@@ -1597,9 +1572,10 @@ vscode-languageserver-types@3.15.0-next.2, vscode-languageserver-types@^3.15.0-n
   version "3.15.0-next.2"
   resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.15.0-next.2.tgz#a0601332cdaafac21931f497bb080cfb8d73f254"
 
-vscode-languageserver@^5.1.0:
+vscode-languageserver@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/vscode-languageserver/-/vscode-languageserver-5.2.1.tgz#0d2feddd33f92aadf5da32450df498d52f6f14eb"
+  integrity sha512-GuayqdKZqAwwaCUjDvMTAVRPJOp/SLON3mJ07eGsx/Iq9HjRymhKWztX41rISqDKhHVVyFM+IywICyZDla6U3A==
   dependencies:
     vscode-languageserver-protocol "3.14.1"
     vscode-uri "^1.0.6"
