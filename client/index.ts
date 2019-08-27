@@ -1,3 +1,4 @@
+// import path from 'path';
 import {
   ExtensionContext,
   LanguageClient,
@@ -15,12 +16,21 @@ export function activate(context: ExtensionContext) {
   // The server is implemented in node
   const serverModule = require.resolve('angular-lsp-service')
 
+  // FIXME: coc.nvim do not have logPath
+  // Log file does not yet exist on disk. It is up to the server to create the
+  // file.
+  // const logFile = path.join(context.logPath, 'nglangsvc.log');
+
   // If the extension is launched in debug mode then the debug server options are used
   // Otherwise the run options are used
   let serverOptions: ServerOptions = {
     run : {
       module: serverModule,
       transport: TransportKind.ipc,
+      // args: [
+        // '--logFile', logFile,
+        // TODO: Might want to turn off logging completely.
+      // ],
       options: {
         env: {
           // Force TypeScript to use the non-polling version of the file watchers.
@@ -31,6 +41,10 @@ export function activate(context: ExtensionContext) {
     debug: {
       module: serverModule,
       transport: TransportKind.ipc,
+      // args: [
+        // '--logFile', logFile,
+        // '--logVerbosity', 'verbose',
+      // ],
       options: {
         env: {
           // Force TypeScript to use the non-polling version of the file watchers.
@@ -38,6 +52,8 @@ export function activate(context: ExtensionContext) {
           NG_DEBUG: true,
         },
         execArgv: [
+          // do not lazily evaluate the code so all breakpoints are respected
+          '--nolazy',
           "--inspect=6009",
         ]
       },
@@ -46,14 +62,18 @@ export function activate(context: ExtensionContext) {
 
   // Options to control the language client
   const clientOptions: LanguageClientOptions = {
-    // Register the server for Angular templates
-    documentSelector: ['ng-template', 'html', 'typescript'],
+    // Register the server for Angular templates and TypeScript documents
+    documentSelector: [
+      // scheme: 'file' means listen to changes to files on disk only
+      // other option is 'untitled', for buffer in the editor (like a new doc)
+      {scheme: 'file', language: 'html'},
+      {scheme: 'file', language: 'typescript'},
+    ],
 
-    // Information in the TypeScript project is necessary to generate Angular template completions
     synchronize: {
       fileEvents: [
+        // Notify the server about file changes to tsconfig.json contained in the workspace
         workspace.createFileSystemWatcher('**/tsconfig.json'),
-        workspace.createFileSystemWatcher('**/*.ts')
       ]
     },
 
