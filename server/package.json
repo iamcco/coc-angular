@@ -16,6 +16,7 @@
     "@angular/compiler": "8.2.2",
     "@angular/compiler-cli": "8.2.2",
     "@angular/core": "8.2.2",
+    "@angular/language-service": "8.2.2",
     "rxjs": "^6.4.0",
     "typescript": "~3.5.3",
     "vscode-languageserver": "^5.2.1",
