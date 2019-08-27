@@ -51,10 +51,10 @@ abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
-angular-lsp-service@0.3.0-beta:
-  version "0.3.0-beta"
-  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.3.0-beta.tgz#5812a0c0347b3db3759bf07d2de58f1db4f43fed"
-  integrity sha512-m7Mg8BcLNNzhPTU2Bee6B2MJecqEjk5ClhAYhqhuWK5GrHUMENoA54NPjlHb8rRl0xDfPyMzg0oKtNXwLT9ctQ==
+angular-lsp-service@0.3.0-beta2:
+  version "0.3.0-beta2"
+  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.3.0-beta2.tgz#d4fbe93cc81d05806364f3933d32b02323ca93d2"
+  integrity sha512-jkqOayHad7bBS7REIiAweoqArlbuSZMGiWGYptjgn2pvbscR1czd41A6aCogcjKg/eFS4bJ6fpjlnHoAJ1jhqA==
   dependencies:
     "@angular/compiler" "8.2.2"
     "@angular/compiler-cli" "8.2.2"
@@ -63,7 +63,6 @@ angular-lsp-service@0.3.0-beta:
     rxjs "^6.4.0"
     typescript "~3.5.3"
     vscode-languageserver "^5.2.1"
-    vscode-uri "^2.0.3"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -1591,7 +1590,7 @@ vscode-uri@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-1.0.6.tgz#6b8f141b0bbc44ad7b07e94f82f168ac7608ad4d"
 
-vscode-uri@^2.0.2, vscode-uri@^2.0.3:
+vscode-uri@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-2.0.3.tgz#25e5f37f552fbee3cec7e5f80cef8469cefc6543"
   integrity sha512-4D3DI3F4uRy09WNtDGD93H9q034OHImxiIcSq664Hq1Y1AScehlP3qqZyTkX/RWxeu0MRMHGkrxYqm2qlDF/aw==

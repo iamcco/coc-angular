@@ -1,6 +1,6 @@
 {
   "name": "angular-lsp-service",
-  "version": "0.3.0-beta",
+  "version": "0.3.0-beta2",
   "description": "coc-angular lsp service",
   "main": "./lib/server.js",
   "author": "iamcco",
