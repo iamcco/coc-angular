@@ -15,32 +15,33 @@ export function activate(context: ExtensionContext) {
   // The server is implemented in node
   const serverModule = require.resolve('angular-lsp-service')
 
-  const options = {
-    module: serverModule,
-    transport: TransportKind.ipc,
-    options: {
-      env: {
-        // Force TypeScript to use the non-polling version of the file watchers.
-        TSC_NONPOLLING_WATCHER: true,
-      },
-    },
-  };
-
   // If the extension is launched in debug mode then the debug server options are used
   // Otherwise the run options are used
   let serverOptions: ServerOptions = {
-    run : options,
-    debug: options
-  }
-
-  // The debug options for the server
-  if (isEnableDebug) {
-    serverOptions.debug.options = {
-      execArgv: [
-        "--nolazy",
-        "--debug=6009"
-      ]
-    }
+    run : {
+      module: serverModule,
+      transport: TransportKind.ipc,
+      options: {
+        env: {
+          // Force TypeScript to use the non-polling version of the file watchers.
+          TSC_NONPOLLING_WATCHER: true,
+        },
+      },
+    },
+    debug: {
+      module: serverModule,
+      transport: TransportKind.ipc,
+      options: {
+        env: {
+          // Force TypeScript to use the non-polling version of the file watchers.
+          TSC_NONPOLLING_WATCHER: true,
+          NG_DEBUG: true,
+        },
+        execArgv: [
+          "--inspect=6009",
+        ]
+      },
+    },
   }
 
   // Options to control the language client
@@ -65,7 +66,8 @@ export function activate(context: ExtensionContext) {
     'angularls',
     'Angular Language Service',
     serverOptions,
-    clientOptions
+    clientOptions,
+    isEnableDebug
   );
 
   // Push the disposable to the context's subscriptions so that the

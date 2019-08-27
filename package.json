@@ -34,8 +34,13 @@
           "description": "enable coc-angular service debug"
         },
         "angular.trace.server": {
-          "type": "boolean",
-          "default": false,
+          "type": "string",
+          "default": "off",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
           "description": "enable angular language server trace log?"
         }
       }
