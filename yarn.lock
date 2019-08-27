@@ -32,6 +32,11 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/language-service@8.2.2":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-8.2.2.tgz#38bda29260850e78132e89a4c370cbaf118c3062"
+  integrity sha512-tQ44UDKXaeEZlYx5+8RT8gfTvIo1wWdH8iP+EVIv9zOoHV1rm+FkmkDCRVy7HnDMIhIrCZaQti6oCuT0u4+S8Q==
+
 "@chemzqm/neovim@5.1.7":
   version "5.1.7"
   resolved "https://registry.yarnpkg.com/@chemzqm/neovim/-/neovim-5.1.7.tgz#9b97f4eea799cece09ee68fe2b7750b441a3ebf0"
@@ -46,17 +51,19 @@ abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
-angular-lsp-service@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.2.0.tgz#7ef39c77570f2ed05be0e7b957bb6b312218e306"
-  integrity sha512-0XtqDnjH4IdXebdKryZ6KP3ZWMo6+V/Vo7lALiu/QBSOgpcBKY+NWidORvMgFsxCgZ+HywxYUB74Rt6FaNZaWg==
+angular-lsp-service@0.3.0-beta:
+  version "0.3.0-beta"
+  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.3.0-beta.tgz#5812a0c0347b3db3759bf07d2de58f1db4f43fed"
+  integrity sha512-m7Mg8BcLNNzhPTU2Bee6B2MJecqEjk5ClhAYhqhuWK5GrHUMENoA54NPjlHb8rRl0xDfPyMzg0oKtNXwLT9ctQ==
   dependencies:
     "@angular/compiler" "8.2.2"
     "@angular/compiler-cli" "8.2.2"
     "@angular/core" "8.2.2"
+    "@angular/language-service" "8.2.2"
     rxjs "^6.4.0"
     typescript "~3.5.3"
     vscode-languageserver "^5.2.1"
+    vscode-uri "^2.0.3"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -1584,9 +1591,10 @@ vscode-uri@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-1.0.6.tgz#6b8f141b0bbc44ad7b07e94f82f168ac7608ad4d"
 
-vscode-uri@^2.0.2:
+vscode-uri@^2.0.2, vscode-uri@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-2.0.3.tgz#25e5f37f552fbee3cec7e5f80cef8469cefc6543"
+  integrity sha512-4D3DI3F4uRy09WNtDGD93H9q034OHImxiIcSq664Hq1Y1AScehlP3qqZyTkX/RWxeu0MRMHGkrxYqm2qlDF/aw==
 
 which-module@^2.0.0:
   version "2.0.0"
