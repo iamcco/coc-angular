@@ -1,4 +1,4 @@
-import * as ts from 'typescript';
+import * as ts from 'typescript/lib/tsserverlibrary'; // used as value
 import * as lsp from 'vscode-languageserver';
 
 // TODO: Move this to `@angular/language-service`.
