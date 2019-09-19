@@ -51,10 +51,10 @@ abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
-angular-lsp-service@0.3.0-beta2:
-  version "0.3.0-beta2"
-  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.3.0-beta2.tgz#d4fbe93cc81d05806364f3933d32b02323ca93d2"
-  integrity sha512-jkqOayHad7bBS7REIiAweoqArlbuSZMGiWGYptjgn2pvbscR1czd41A6aCogcjKg/eFS4bJ6fpjlnHoAJ1jhqA==
+angular-lsp-service@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/angular-lsp-service/-/angular-lsp-service-0.3.1.tgz#8b7b4bac9e51c180f3dc5cecbb26e0f4fb103754"
+  integrity sha512-YzWzQVqKBt+95pBm4bU3E0TJUbUcKEpTj8ouCU50eQBkWjcoqBzZtYx69NIYV4kSGs4omyePyBsnbOsykK/r5Q==
   dependencies:
     "@angular/compiler" "8.2.2"
     "@angular/compiler-cli" "8.2.2"
@@ -63,6 +63,7 @@ angular-lsp-service@0.3.0-beta2:
     rxjs "^6.4.0"
     typescript "~3.5.3"
     vscode-languageserver "^5.2.1"
+    zone.js "0.9.1"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -1652,3 +1653,8 @@ yargs@13.1.0:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^13.0.0"
+
+zone.js@0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.9.1.tgz#e37c6e5c54c13fae4de26b5ffe8d8e9212da6d9b"
+  integrity sha512-GkPiJL8jifSrKReKaTZ5jkhrMEgXbXYC+IPo1iquBjayRa0q86w3Dipjn8b415jpitMExe9lV8iTsv8tk3DGag==

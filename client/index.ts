@@ -36,6 +36,9 @@ export function activate(context: ExtensionContext) {
           // Force TypeScript to use the non-polling version of the file watchers.
           TSC_NONPOLLING_WATCHER: true,
         },
+        execArgv: [
+          '--max_old_space_size=4096'
+        ]
       },
     },
     debug: {
@@ -53,6 +56,7 @@ export function activate(context: ExtensionContext) {
         },
         execArgv: [
           // do not lazily evaluate the code so all breakpoints are respected
+          '--max_old_space_size=4096',
           '--nolazy',
           "--inspect=6009",
         ]

@@ -1,6 +1,6 @@
 {
   "name": "angular-lsp-service",
-  "version": "0.3.0-beta2",
+  "version": "0.3.1",
   "description": "coc-angular lsp service",
   "main": "./lib/server.js",
   "author": "iamcco",
@@ -19,7 +19,8 @@
     "@angular/language-service": "8.2.2",
     "rxjs": "^6.4.0",
     "typescript": "~3.5.3",
-    "vscode-languageserver": "^5.2.1"
+    "vscode-languageserver": "^5.2.1",
+    "zone.js": "0.9.1"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.13",
