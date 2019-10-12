@@ -19,12 +19,18 @@
     "coc": "^0.0.62"
   },
   "activationEvents": [
-    "onLanguage:ng-template",
     "onLanguage:html",
     "onLanguage:typescript"
   ],
   "main": "./lib/index.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "angular.restartNgServer",
+        "title": "Restart Angular Language server",
+        "category": "Angular"
+      }
+    ],
     "configuration": {
       "title": "angular configuration",
       "properties": {
@@ -42,6 +48,11 @@
             "verbose"
           ],
           "description": "enable angular language server trace log?"
+        },
+        "angular.ngdk": {
+          "type": ["string", "null"],
+          "default": null,
+          "description": "Specifies the folder path to @angular/language-service."
         }
       }
     }
@@ -53,7 +64,8 @@
   "devDependencies": {
     "@types/node": "^10.9.4",
     "coc.nvim": "^0.0.72",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "vscode-languageclient": "^5.2.1"
   },
   "dependencies": {
     "angular-lsp-service": "0.3.1"
