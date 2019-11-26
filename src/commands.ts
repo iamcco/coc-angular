@@ -7,7 +7,6 @@
  */
 
 import * as coc from 'coc.nvim';
-import * as lsp from 'vscode-languageclient';
 
 /**
  * Represent a vscode command with an ID and an impl function `execute`.
@@ -21,7 +20,7 @@ interface Command {
  * Restart the language server by killing the process then spanwing a new one.
  * @param client language client
  */
-function restartNgServer(client: lsp.LanguageClient): Command {
+function restartNgServer(client: coc.LanguageClient): Command {
   return {
     id: 'angular.restartNgServer',
     async execute() {
@@ -35,7 +34,7 @@ function restartNgServer(client: lsp.LanguageClient): Command {
  * Register all supported vscode commands for the Angular extension.
  * @param client language client
  */
-export function registerCommands(client: lsp.LanguageClient): coc.Disposable[] {
+export function registerCommands(client: coc.LanguageClient): coc.Disposable[] {
   const commands: Command[] = [
     restartNgServer(client),
   ];
