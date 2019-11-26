@@ -1,6 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.802.2
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.900.0
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/6fb43308057eac536251a176b09f4379f0d11a62)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -22,7 +23,17 @@ and external templates including:
 * Quick info
 * Go to definition
 
-This extension uses `@angular/language-service@8.2.x` and `typescript@3.5.x`.
+> This extension uses typescript@3.6.x.
+
+### Commands
+
+- `angular.restartNgServer` Restart Angular Language server
+
+### Configuration
+
+- `angular.trace.server` enable angular language server trace log
+- `angular.ngdk` Specifies the folder path to `@angular/language-service`.
+- `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
 
 ### Buy Me A Coffee ☕️
 

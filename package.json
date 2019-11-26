@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "0.3.1",
+  "version": "0.900.0",
   "keywords": [
     "coc.nvim",
     "angular",
@@ -16,23 +16,24 @@
     "url": "https://github.com/iamcco/coc-angular"
   },
   "engines": {
-    "coc": "^0.0.62"
+    "coc": "^0.0.74"
   },
+  "main": "./out/index.js",
   "activationEvents": [
-    "onLanguage:ng-template",
     "onLanguage:html",
     "onLanguage:typescript"
   ],
-  "main": "./lib/index.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "angular.restartNgServer",
+        "title": "Restart Angular Language server",
+        "category": "Angular"
+      }
+    ],
     "configuration": {
       "title": "angular configuration",
       "properties": {
-        "angular.debug": {
-          "type": "boolean",
-          "default": false,
-          "description": "enable coc-angular service debug"
-        },
         "angular.trace.server": {
           "type": "string",
           "default": "off",
@@ -42,20 +43,42 @@
             "verbose"
           ],
           "description": "enable angular language server trace log?"
+        },
+        "angular.ngdk": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "Specifies the folder path to @angular/language-service."
+        },
+        "angular.log": {
+          "type": "string",
+          "enum": [
+            "off",
+            "terse",
+            "normal",
+            "verbose"
+          ],
+          "default": "terse",
+          "description": "Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project."
         }
       }
     }
   },
   "scripts": {
-    "build": "tsc -p ./",
+    "build": "rm -rf ./out/ && webpack",
     "watch": "tsc -w -p ./"
   },
   "devDependencies": {
     "@types/node": "^10.9.4",
-    "coc.nvim": "^0.0.72",
-    "typescript": "~3.5.3"
+    "coc.nvim": "^0.0.74",
+    "ts-loader": "^6.2.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "angular-lsp-service": "0.3.1"
+    "typescript": "~3.6.4",
+    "@angular/language-server": "^0.900.0"
   }
 }
