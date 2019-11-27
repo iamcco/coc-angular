@@ -74,11 +74,12 @@
     "@types/node": "^10.9.4",
     "coc.nvim": "^0.0.74",
     "ts-loader": "^6.2.1",
+    "vscode-languageserver-protocol": "^3.14.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "typescript": "~3.6.4",
-    "@angular/language-server": "^0.900.0"
+    "@angular/language-server": "^0.900.0",
+    "typescript": "~3.6.4"
   }
 }

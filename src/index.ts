@@ -10,9 +10,11 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as coc from 'coc.nvim';
+import {CompletionItem, CancellationToken} from 'vscode-languageserver-protocol';
 
 import {registerCommands} from './commands';
 import {projectLoadingNotification} from './protocol';
+import {provideCompletionItem} from './middleware/provideCompletionItem';
 
 export function activate(context: coc.ExtensionContext) {
   // If the extension is launched in debug mode then the debug server options are used
@@ -40,7 +42,12 @@ export function activate(context: coc.ExtensionContext) {
     },
 
     // Don't let our output console pop open
-    revealOutputChannelOn: coc.RevealOutputChannelOn.Never
+    revealOutputChannelOn: coc.RevealOutputChannelOn.Never,
+
+    // middleware
+    middleware: {
+      provideCompletionItem
+    }
   };
 
   // Create the language client and start the client.
