@@ -10,7 +10,6 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as coc from 'coc.nvim';
-import {CompletionItem, CancellationToken} from 'vscode-languageserver-protocol';
 
 import {registerCommands} from './commands';
 import {projectLoadingNotification} from './protocol';

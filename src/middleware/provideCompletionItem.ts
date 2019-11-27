@@ -36,7 +36,7 @@ export const provideCompletionItem = async (
       switch(line[charCol]) {
           /**
            * type with *
-           *   **ngIf => *ngIf
+           *   **ngIf => *ngIf="|"
            */
         case '*':
           if (item.textEdit) {
@@ -49,7 +49,7 @@ export const provideCompletionItem = async (
           }
           break;
           /**
-           * ((click)) => (click)
+           * ((click)) => (click)="|"
            */
         case '(':
           if (item.textEdit) {
@@ -65,7 +65,7 @@ export const provideCompletionItem = async (
           }
           break;
           /**
-           * ((xxx)) => (xxx)
+           * [[xxx]] => [xxx]="|"
            */
         case '[':
           if (item.textEdit) {
@@ -80,6 +80,9 @@ export const provideCompletionItem = async (
             }
           }
           break;
+          /**
+           * xxx => xxx="|"
+           */
         default:
           if (item.textEdit) {
             if (line[nextCharCol] !== '=' && line[colnr] !== '=') {
