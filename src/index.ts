@@ -10,11 +10,11 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as coc from 'coc.nvim';
+import {CompletionItem, CancellationToken} from 'vscode-languageserver-protocol';
 
 import {registerCommands} from './commands';
 import {projectLoadingNotification} from './protocol';
-import {CompletionItem, CancellationToken} from 'vscode-languageserver-protocol';
-import {completionResolve} from './middleware/completionResolve';
+import {provideCompletionItem} from './middleware/provideCompletionItem';
 
 export function activate(context: coc.ExtensionContext) {
   // If the extension is launched in debug mode then the debug server options are used
@@ -46,7 +46,7 @@ export function activate(context: coc.ExtensionContext) {
 
     // middleware
     middleware: {
-      resolveCompletionItem: completionResolve
+      provideCompletionItem
     }
   };
 
