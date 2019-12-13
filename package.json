@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "0.900.2",
+  "version": "0.900.3",
   "keywords": [
     "coc.nvim",
     "angular",
@@ -79,7 +79,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@angular/language-server": "^0.900.1",
+    "@angular/language-server": "^0.900.2",
     "typescript": "~3.6.4"
   }
 }
