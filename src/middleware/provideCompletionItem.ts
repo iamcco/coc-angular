@@ -32,7 +32,15 @@ export const provideCompletionItem = async (
   const nextCharCol = colnr - 1
 
   items = items.map(item => {
-    if (item.kind === CompletionItemKind.Property && item.detail === 'attribute') {
+    if (item.kind === CompletionItemKind.Method && item.detail === 'method') {
+      /**
+       * methodName()| => methodName(|)
+       */
+      if (item.textEdit && /\(\)$/.test(item.textEdit.newText)) {
+        item.insertTextFormat = InsertTextFormat.Snippet
+        item.textEdit.newText = `${item.textEdit.newText.slice(0, -2)}(\${1})\${0}`
+      }
+    } else if (item.kind === CompletionItemKind.Property && item.detail === 'attribute') {
       switch(line[charCol]) {
           /**
            * type with *
