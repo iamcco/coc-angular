@@ -47,10 +47,10 @@ export const provideCompletionItem = async (
            *   **ngIf => *ngIf="|"
            */
         case '*':
-          if (item.textEdit) {
-            const { start } = item.textEdit.range
-            item.textEdit.range.start = Position.create(start.line, start.character - 1)
-          }
+          // if (item.textEdit) {
+          //   const { start } = item.textEdit.range
+          //   item.textEdit.range.start = Position.create(start.line, start.character - 1)
+          // }
           if (line[nextCharCol] !== '=') {
             item.insertTextFormat = InsertTextFormat.Snippet
             item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
@@ -65,6 +65,11 @@ export const provideCompletionItem = async (
             item.textEdit.range.start = Position.create(start.line, start.character - 1)
             if (line[nextCharCol] === ')') {
               item.textEdit.range.end = Position.create(end.line, end.character + 1)
+            }
+            if (item.textEdit.newText.startsWith('(')) {
+              item.textEdit.newText = `${item.textEdit.newText}`
+            } else {
+              item.textEdit.newText = `(${item.textEdit.newText})`
             }
             if (line[nextCharCol] !== '=' && line[colnr] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet
@@ -81,6 +86,11 @@ export const provideCompletionItem = async (
             item.textEdit.range.start = Position.create(start.line, start.character - 1)
             if (line[nextCharCol] === ']') {
               item.textEdit.range.end = Position.create(end.line, end.character + 1)
+            }
+            if (item.textEdit.newText.startsWith('[')) {
+              item.textEdit.newText = `${item.textEdit.newText}`
+            } else {
+              item.textEdit.newText = `[${item.textEdit.newText}]`
             }
             if (line[nextCharCol] !== '=' && line[colnr] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet

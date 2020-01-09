@@ -61,31 +61,33 @@ export function activate(context: coc.ExtensionContext) {
       client.start(),
   );
 
-  client.onReady().then(() => {
-    const projectLoadingTasks = new Map<string, {resolve: () => void}>();
-
-    client.onNotification(projectLoadingNotification.start, (projectName: string) => {
-      const statusBar = coc.workspace.createStatusBarItem(0, { progress: true })
-      statusBar.text = 'Angular'
-      statusBar.show()
-      projectLoadingTasks.set(
-        projectName,
-        {
+   client.onDidChangeState((e) => {
+    let task: {resolve: () => void}|undefined;
+    if (e.newState == coc.State.Running) {
+      client.onNotification(projectLoadingNotification.start, () => {
+        if (task) {
+          task.resolve();
+          task = undefined;
+        }
+        const statusBar = coc.workspace.createStatusBarItem(0, { progress: true })
+        statusBar.text = 'Angular'
+        statusBar.show()
+        task = {
           resolve: () => {
             statusBar.isProgress = false
             statusBar.hide()
             statusBar.dispose()
           }
-      })
-    });
+        }
+      });
 
-    client.onNotification(projectLoadingNotification.finish, (projectName: string) => {
-      const task = projectLoadingTasks.get(projectName);
-      if (task) {
-        task.resolve();
-        projectLoadingTasks.delete(projectName);
-      }
-    });
+      client.onNotification(projectLoadingNotification.finish, () => {
+        if (task) {
+          task.resolve();
+          task = undefined;
+        }
+      });
+    }
   });
 }
 
