@@ -50,7 +50,7 @@ export function activate(context: coc.ExtensionContext) {
   };
 
   // Create the language client and start the client.
-  const forceDebug = !!process.env['NG_DEBUG'];
+  const forceDebug = process.env['NG_DEBUG'] === 'true';
   const client =
       new coc.LanguageClient('angular', 'Angular Language Service', serverOptions, clientOptions, forceDebug);
 
@@ -103,13 +103,13 @@ function getProbeLocations(configValue: string | null, bundled: string): string[
   if (configValue) {
     locations.push(configValue);
   }
-  // If not, look in workspaces currently open
+  // Prioritize the bundled version
+  locations.push(bundled);
+  // Look in workspaces currently open
   const workspaceFolders = coc.workspace.workspaceFolders || [];
   for (const folder of workspaceFolders) {
     locations.push(coc.Uri.parse(folder.uri).fsPath);
   }
-  // If all else fails, load the bundled version
-  locations.push(bundled);
   return locations;
 }
 
@@ -130,29 +130,12 @@ function constructArgs(ctx: coc.ExtensionContext, debug: boolean): string[] {
     args.push('--logVerbosity', debug ? 'verbose' : ngLog);
   }
 
-  // Due to a bug in tsserver, ngProbeLocation is not honored when tsserver
-  // loads the plugin. tsserver would look for @angular/language-service in its
-  // peer node_modules directory, and use that if it finds one. To work around
-  // this bug, always load typescript from the bundled location for now, so that
-  // the bundled @angular/language-service is always chosen.
-  // See the following links:
-  // 1. https://github.com/angular/vscode-ng-language-service/issues/437
-  // 2. https://github.com/microsoft/TypeScript/issues/34616
-  // 3. https://github.com/microsoft/TypeScript/pull/34656
-  // TODO: Remove workaround once
-  // https://github.com/microsoft/TypeScript/commit/f689982c9f2081bc90d2192eee96b404f75c4705
-  // is released and Angular is switched over to the new TypeScript version.
-  args.push('--ngProbeLocations', ctx.extensionPath);
-  args.push('--tsProbeLocations', ctx.extensionPath);
-
-  /*
   const ngdk: string|null = config.get('angular.ngdk', null);
   const ngProbeLocations = getProbeLocations(ngdk, ctx.asAbsolutePath('server'));
   args.push('--ngProbeLocations', ngProbeLocations.join(','));
   const tsdk: string|null = config.get('typescript.tsdk', null);
   const tsProbeLocations = getProbeLocations(tsdk, ctx.extensionPath);
   args.push('--tsProbeLocations', tsProbeLocations.join(','));
-  */
 
   return args;
 }

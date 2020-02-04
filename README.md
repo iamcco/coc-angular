@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.900.4
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/92bb8e277c5c7a6fffa57fe6329bdacf6ec19a05)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.900.9
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/9db9d6086097b52101caa6f2e8cedcc85265f96e)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -22,8 +22,6 @@ and external templates including:
 * AOT Diagnostic messages
 * Quick info
 * Go to definition
-
-> This extension uses typescript@3.6.x.
 
 ### Commands
 
