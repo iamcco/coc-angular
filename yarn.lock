@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@angular/language-server@^0.900.18":
-  version "0.900.18"
-  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-0.900.18.tgz#70cafbf6b756af06559bbb7d65cc07134507c082"
-  integrity sha512-gOyZyRpZNlrr/RC15+4ODjzrVbgi8U8me7ARbqyFR9V4b45Va1eDneTeb/shK+6xgbKneyPIveyUcv7XfbGKrg==
+"@angular/language-server@^0.901.0":
+  version "0.901.0"
+  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-0.901.0.tgz#53b8f7de4f9b795522c6ab775dc1e833a5f19c34"
+  integrity sha512-/eMymOo5s+Mjxf/Gh2dN2SqlRovXO105hAmjcXYowPsHWqkprAHX871+yr7X4aqRZ3TIovufiqNOptkU8Epm2w==
   dependencies:
-    "@angular/language-service" "9.0.7"
+    "@angular/language-service" "9.1.0"
     vscode-languageserver "6.1.1"
     vscode-uri "2.1.1"
 
-"@angular/language-service@9.0.7":
-  version "9.0.7"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-9.0.7.tgz#c204467383ee5f194a73a365ea7c543c6900bb54"
-  integrity sha512-IZG1kvw48JyFRy7bfMHqBixWrEHZmXmkP5DWsi5Tw6KusaczkMghI20BevCkodPcajXWHAUHNKyp1tlE3OnH0w==
+"@angular/language-service@9.1.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-9.1.0.tgz#b61aeec3469f0f33fec7bd30e6ad729cdf10b160"
+  integrity sha512-2f8ECoXrj40oS1rtIfi+F8T4WPzundcZDs8WMFNBuWYbk14v1S9sTgMEmZyePHGkPjt6IfYiLJKJCvVgrt1nxQ==
 
 "@chemzqm/neovim@5.1.9":
   version "5.1.9"
@@ -2974,10 +2974,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@~3.7.4:
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
-  integrity sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
+typescript@~3.8.0:
+  version "3.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
+  integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
 
 union-value@^1.0.0:
   version "1.0.1"

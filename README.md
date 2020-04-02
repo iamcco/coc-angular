@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.900.18
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/b69529025431eb9176378e78a41a49deb1eff616)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.901.0
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/880d87da3042f0fa1ac24470b2bf9302058be17a)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -32,6 +32,20 @@ and external templates including:
 - `angular.trace.server` enable angular language server trace log
 - `angular.ngdk` Specifies the folder path to `@angular/language-service`.
 - `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
+
+## Versioning
+
+The language service extension uses the `@angular/language-service` package for its backend. This
+package is loaded either from the version bundled with the extension, or from the current workspace
+project the extension is running on. Due to the behavior of TypeScript below version 3.8,
+incompatible versions of the language service may sometimes be loaded. If you are using a version of
+TypeScript below 3.8, we suggest either
+
+- Not installing `@angular/language-service` in your project (recommended; will fallback on the
+    version bundled with the extension)
+- Installing and keeping updates for the latest version of `@angular/language-service`
+
+For further information, please see [#594](https://github.com/angular/vscode-ng-language-service/issues/594).
 
 ### Buy Me A Coffee ☕️
 
