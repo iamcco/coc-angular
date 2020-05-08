@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.901.0
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/880d87da3042f0fa1ac24470b2bf9302058be17a)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.901.4
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/12f0c4c5e22e5eed7aaf700088c8b61873bc72d8)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -35,17 +35,18 @@ and external templates including:
 
 ## Versioning
 
-The language service extension uses the `@angular/language-service` package for its backend. This
-package is loaded either from the version bundled with the extension, or from the current workspace
-project the extension is running on. Due to the behavior of TypeScript below version 3.8,
-incompatible versions of the language service may sometimes be loaded. If you are using a version of
-TypeScript below 3.8, we suggest either
+The language service extension relies on the `@angular/language-service` and `typescript` packages for its backend. These packages are loaded, in order of priority, from:
 
-- Not installing `@angular/language-service` in your project (recommended; will fallback on the
-    version bundled with the extension)
-- Installing and keeping updates for the latest version of `@angular/language-service`
+- The path specified by `angular.ngdk` and `typescript.tsdk,` respectively, in project or global settings.
+- *(Recommended)* The version of these packages bundled with the Angular Language Service extension.
+- The version of these packages present in the current workspace's node_modules.
 
-For further information, please see [#594](https://github.com/angular/vscode-ng-language-service/issues/594).
+We suggest not specifying neither `angular.ngdk` nor `typescript.tsdk` in your VSCode settings per method (1) above.
+If the `@angular/language-service` and typescript packages are loaded by methods (1) or (3), there is a potential
+for a mismatch between the API expected by `@angular/language-service` and the API provided by `typescript`.
+This could lead to a failure of the language service extension.
+
+For more information, please see [#594](https://github.com/angular/vscode-ng-language-service/issues/594).
 
 ### Buy Me A Coffee ☕️
 
