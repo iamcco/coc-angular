@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@angular/language-server@^0.901.4":
-  version "0.901.4"
-  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-0.901.4.tgz#6d8ccd0152b2f048090726b03fee00ef7ecbc6ba"
-  integrity sha512-j+nXvEKdHXTGhMpeC/2da1hTGYyHnitR3uU8rxHITkSJUlGqFmU0ojFkbJbiUd15JyrOMQH0zo0AzXm3Mi2WWQ==
+"@angular/language-server@^0.901.6":
+  version "0.901.6"
+  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-0.901.6.tgz#d2c2524c2a08b9617c8a14c10232aba94329614b"
+  integrity sha512-rRbPVDAgETqpxONSHEqtCdOey7AVIc/HGh4ERzBnFZTqVxVuyxQ+w/upu+yq71tJNHMwUM9xS3PlaCg7lmg+UQ==
   dependencies:
-    "@angular/language-service" "9.1.4"
+    "@angular/language-service" "9.1.6"
     vscode-languageserver "6.1.1"
     vscode-uri "2.1.1"
 
-"@angular/language-service@9.1.4":
-  version "9.1.4"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-9.1.4.tgz#2fa2c444e5a5a6036d5ca43d2887826df17d0553"
-  integrity sha512-eyVxxiegdb4ESdFGfkuDN+YfUbOVHRQLjIl6ACFJQDNHzVXzbmuqpyr5hIJANIVady103/7+dqRxxJo1DdIdTQ==
+"@angular/language-service@9.1.6":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-9.1.6.tgz#ff5e4bda847192820d7921f4551aaa1af8192ed3"
+  integrity sha512-pB18hVoAbIuk1Wus8ur7yUxSukfPR4pCXiOfbxDQ94qlCzLAzIwXbaNV4erpBfL/fUKxMY3h8RrVt0dfm6M5RQ==
 
 "@chemzqm/neovim@5.1.9":
   version "5.1.9"
