@@ -17,6 +17,9 @@ export const provideCompletionItem = async (
   next: ProvideCompletionItemsSignature
 ) => {
   const res = await next(document, position, context, token)
+  if (!res) {
+    return res
+  }
   let items: CompletionItem[] = []
   let isIncomplete: boolean
 
@@ -41,7 +44,8 @@ export const provideCompletionItem = async (
         item.textEdit.newText = `${item.textEdit.newText.slice(0, -2)}(\${1})\${0}`
       }
     } else if (item.kind === CompletionItemKind.Property && item.detail === 'attribute') {
-      switch(line[charCol]) {
+      const c = item.textEdit && line[item.textEdit.range.start.character - 1] || line[charCol]
+      switch(c) {
           /**
            * type with *
            *   **ngIf => *ngIf="|"
