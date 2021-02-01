@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v0.1000.7
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/c383c1dd1b3146a15f7bfa88793a9a8d877df5f3)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v11.1.1
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/c7fd18e23fd184b57ffb5229762805fab4d47ebd)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -26,12 +26,14 @@ and external templates including:
 ### Commands
 
 - `angular.restartNgServer` Restart Angular Language server
+- `angular.openLogFile` Open Angular Server log
 
 ### Configuration
 
 - `angular.trace.server` enable angular language server trace log
 - `angular.ngdk` Specifies the folder path to `@angular/language-service`.
 - `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
+- `angular.experimental-ivy` This is an experimental feature that enables the Ivy language service.
 
 ## Versioning
 
