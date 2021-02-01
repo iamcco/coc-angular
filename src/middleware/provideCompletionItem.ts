@@ -1,13 +1,4 @@
-import { ProvideCompletionItemsSignature, CompletionContext } from 'coc.nvim';
-import {
-  CancellationToken,
-  Position,
-  TextDocument,
-  CompletionItem,
-  CompletionList,
-  CompletionItemKind,
-  InsertTextFormat,
-} from 'vscode-languageserver-protocol';
+import { ProvideCompletionItemsSignature, CompletionContext, TextDocument, Position, CancellationToken, CompletionItem, CompletionItemKind, CompletionList, InsertTextFormat } from 'coc.nvim';
 
 export const provideCompletionItem = async (
   document: TextDocument,
@@ -30,9 +21,9 @@ export const provideCompletionItem = async (
     items = res as CompletionItem[]
   }
 
-  const { line, colnr } = context.option
-  const charCol = colnr - 2
-  const nextCharCol = colnr - 1
+  const { line, character } = position
+  const charCol = character - 2
+  const nextCharCol = character - 1
 
   items = items.map(item => {
     if (item.kind === CompletionItemKind.Method && item.detail === 'method') {
@@ -75,7 +66,7 @@ export const provideCompletionItem = async (
             } else {
               item.textEdit.newText = `(${item.textEdit.newText})`
             }
-            if (line[nextCharCol] !== '=' && line[colnr] !== '=') {
+            if (line[nextCharCol] !== '=' && line[character] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet
               item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
             }
@@ -96,7 +87,7 @@ export const provideCompletionItem = async (
             } else {
               item.textEdit.newText = `[${item.textEdit.newText}]`
             }
-            if (line[nextCharCol] !== '=' && line[colnr] !== '=') {
+            if (line[nextCharCol] !== '=' && line[character] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet
               item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
             }
@@ -107,7 +98,7 @@ export const provideCompletionItem = async (
            */
         default:
           if (item.textEdit) {
-            if (line[nextCharCol] !== '=' && line[colnr] !== '=') {
+            if (line[nextCharCol] !== '=' && line[character] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet
               item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
             }

@@ -6,7 +6,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-export const projectLoadingNotification = {
-  start: 'angular-language-service/projectLoadingStart',
-  finish: 'angular-language-service/projectLoadingFinish'
-};
+export interface ServerOptions {
+  logFile?: string;
+}
