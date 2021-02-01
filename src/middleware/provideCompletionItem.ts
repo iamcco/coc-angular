@@ -1,4 +1,4 @@
-import { ProvideCompletionItemsSignature, CompletionContext, TextDocument, Position, CancellationToken, CompletionItem, CompletionItemKind, CompletionList, InsertTextFormat } from 'coc.nvim';
+import { ProvideCompletionItemsSignature, CompletionContext, TextDocument, Position, CancellationToken, CompletionItem, CompletionItemKind, CompletionList, InsertTextFormat, Range, workspace, window } from 'coc.nvim';
 
 export const provideCompletionItem = async (
   document: TextDocument,
@@ -21,9 +21,13 @@ export const provideCompletionItem = async (
     items = res as CompletionItem[]
   }
 
-  const { line, character } = position
-  const charCol = character - 2
-  const nextCharCol = character - 1
+  const { line: lineNum, character: colNr } = position
+  const line = document.getText(Range.create(
+    Position.create(lineNum, 0),
+    Position.create(lineNum + 1, 0)
+  ))
+  const charCol = colNr - 1
+  const nextCharCol = colNr
 
   items = items.map(item => {
     if (item.kind === CompletionItemKind.Method && item.detail === 'method') {
@@ -37,24 +41,20 @@ export const provideCompletionItem = async (
     } else if (item.kind === CompletionItemKind.Property && item.detail === 'attribute') {
       const c = item.textEdit && line[item.textEdit.range.start.character - 1] || line[charCol]
       switch(c) {
+        case '*':
           /**
            * type with *
            *   **ngIf => *ngIf="|"
            */
-        case '*':
-          // if (item.textEdit) {
-          //   const { start } = item.textEdit.range
-          //   item.textEdit.range.start = Position.create(start.line, start.character - 1)
-          // }
           if (line[nextCharCol] !== '=') {
             item.insertTextFormat = InsertTextFormat.Snippet
             item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
           }
           break;
+        case '(':
           /**
            * ((click)) => (click)="|"
            */
-        case '(':
           if (item.textEdit) {
             const { start, end } = item.textEdit.range
             item.textEdit.range.start = Position.create(start.line, start.character - 1)
@@ -66,16 +66,16 @@ export const provideCompletionItem = async (
             } else {
               item.textEdit.newText = `(${item.textEdit.newText})`
             }
-            if (line[nextCharCol] !== '=' && line[character] !== '=') {
+            if (line[nextCharCol] !== '=' && line[nextCharCol + 1] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet
               item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
             }
           }
           break;
+        case '[':
           /**
            * [[xxx]] => [xxx]="|"
            */
-        case '[':
           if (item.textEdit) {
             const { start, end } = item.textEdit.range
             item.textEdit.range.start = Position.create(start.line, start.character - 1)
@@ -87,18 +87,18 @@ export const provideCompletionItem = async (
             } else {
               item.textEdit.newText = `[${item.textEdit.newText}]`
             }
-            if (line[nextCharCol] !== '=' && line[character] !== '=') {
+            if (line[nextCharCol] !== '=' && line[nextCharCol + 1] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet
               item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
             }
           }
           break;
+        default:
           /**
            * xxx => xxx="|"
            */
-        default:
           if (item.textEdit) {
-            if (line[nextCharCol] !== '=' && line[character] !== '=') {
+            if (line[nextCharCol] !== '=' && line[nextCharCol + 1] !== '=') {
               item.insertTextFormat = InsertTextFormat.Snippet
               item.textEdit.newText = `${item.textEdit.newText}="\${1}"\${0}`
             }
