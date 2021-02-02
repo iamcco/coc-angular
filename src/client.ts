@@ -80,7 +80,7 @@ export class AngularLanguageClient implements vscode.Disposable {
     await this.client.onReady();
     // Must wait for the client to be ready before registering notification
     // handlers.
-    registerNotificationHandlers(this.client);
+    this.disposables.push(registerNotificationHandlers(this.client));
     registerProgressHandlers(this.client, this.context);
   }
 
@@ -109,12 +109,8 @@ export class AngularLanguageClient implements vscode.Disposable {
 }
 
 function registerNotificationHandlers(client: vscode.LanguageClient) {
+  let task: {resolve: () => void}|undefined;
   client.onNotification(ProjectLoadingStart, () => {
-    let task: {resolve: () => void}|undefined;
-    if (task) {
-      task.resolve();
-      task = undefined;
-    }
     const statusBar = vscode.window.createStatusBarItem(0, { progress: true })
     statusBar.text = 'Angular'
     statusBar.show()
@@ -130,6 +126,12 @@ function registerNotificationHandlers(client: vscode.LanguageClient) {
       task = undefined;
     });
   });
+  return vscode.Disposable.create(() => {
+    if (task) {
+      task.resolve()
+      task = undefined
+    }
+  })
 }
 
 function registerProgressHandlers(client: vscode.LanguageClient, context: vscode.ExtensionContext) {
