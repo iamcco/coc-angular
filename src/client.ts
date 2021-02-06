@@ -10,7 +10,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'coc.nvim';
 
-import {ProjectLoadingFinish, ProjectLoadingStart} from './common/notifications';
+import {ProjectLoadingFinish, ProjectLoadingStart, SuggestIvyLanguageService, SuggestIvyLanguageServiceParams, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progress';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 
@@ -80,7 +80,7 @@ export class AngularLanguageClient implements vscode.Disposable {
     await this.client.onReady();
     // Must wait for the client to be ready before registering notification
     // handlers.
-    this.disposables.push(registerNotificationHandlers(this.client));
+    registerNotificationHandlers(this.client, this.context)
     registerProgressHandlers(this.client, this.context);
   }
 
@@ -108,7 +108,7 @@ export class AngularLanguageClient implements vscode.Disposable {
   }
 }
 
-function registerNotificationHandlers(client: vscode.LanguageClient) {
+function registerNotificationHandlers(client: vscode.LanguageClient, context: vscode.ExtensionContext) {
   let task: {resolve: () => void}|undefined;
   client.onNotification(ProjectLoadingStart, () => {
     const statusBar = vscode.window.createStatusBarItem(0, { progress: true })
@@ -126,12 +126,50 @@ function registerNotificationHandlers(client: vscode.LanguageClient) {
       task = undefined;
     });
   });
-  return vscode.Disposable.create(() => {
+  context.subscriptions.push(vscode.Disposable.create(() => {
     if (task) {
       task.resolve()
       task = undefined
     }
-  })
+  }))
+  client.onNotification(SuggestStrictMode, async (params: SuggestStrictModeParams) => {
+    const openTsConfig = 'Open tsconfig.json';
+    // Markdown is not generally supported in `showInformationMessage()`,
+    // but links are supported. See
+    // https://github.com/microsoft/vscode/issues/20595#issuecomment-281099832
+    const selection = await vscode.window.showInformationMessage(
+      'Some language features are not available. To access all features, enable ' +
+      '[strictTemplates](https://angular.io/guide/angular-compiler-options#stricttemplates) in ' +
+      '[angularCompilerOptions](https://angular.io/guide/angular-compiler-options).',
+      openTsConfig,
+    );
+    vscode.window.showMessage(`selection: ${selection}`)
+    if (selection === openTsConfig) {
+      await vscode.workspace.openResource(params.configFilePath);
+    }
+  });
+
+  client.onNotification(
+    SuggestIvyLanguageService, async (params: SuggestIvyLanguageServiceParams) => {
+      const config = vscode.workspace.getConfiguration();
+      if (config.get('angular.enable-experimental-ivy-prompt') === false) {
+        return;
+      }
+
+      const enableIvy = 'Enable';
+      const doNotPromptAgain = 'Do not show this again';
+      const selection = await vscode.window.showInformationMessage(
+        params.message,
+        enableIvy,
+        doNotPromptAgain,
+      );
+      if (selection === enableIvy) {
+        config.update('angular.experimental-ivy', true, (vscode as any).ConfigurationTarget?.Global);
+      } else if (selection === doNotPromptAgain) {
+        config.update(
+          'angular.enable-experimental-ivy-prompt', false, (vscode as any).ConfigurationTarget?.Global);
+      }
+    });
 }
 
 function registerProgressHandlers(client: vscode.LanguageClient, context: vscode.ExtensionContext) {
