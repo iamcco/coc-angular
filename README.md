@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v11.1.3
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/988dd7b4fc4b427757ee46fcb0ed39f43a18892f)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v11.2.1
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/5decca1fa3470faf5ef9debcb498efdb1fd6aa60)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -27,6 +27,7 @@ and external templates including:
 
 - `angular.restartNgServer` Restart Angular Language server
 - `angular.openLogFile` Open Angular Server log
+- `angular.getTemplateTcb` View Template Typecheck Block
 
 ### Configuration
 

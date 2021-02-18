@@ -12,9 +12,17 @@ import * as vscode from 'coc.nvim';
 
 import {ProjectLoadingFinish, ProjectLoadingStart, SuggestIvyLanguageService, SuggestIvyLanguageServiceParams, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progress';
+import {GetTcbRequest} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 
 import {ProgressReporter} from './progress-reporter';
+import {code2ProtocolConverter, protocol2CodeConverter} from './common/utils';
+
+interface GetTcbResponse {
+  uri: vscode.Uri;
+  content: string;
+  selections: vscode.Range[];
+}
 
 export class AngularLanguageClient implements vscode.Disposable {
   private client: vscode.LanguageClient|null = null;
@@ -97,6 +105,42 @@ export class AngularLanguageClient implements vscode.Disposable {
     this.client = null;
   }
 
+   /**
+   * Requests a template typecheck block at the current cursor location in the
+   * specified editor.
+   */
+  async getTcbUnderCursor(): Promise<GetTcbResponse|undefined> {
+    if (this.client === null) {
+      return undefined;
+    }
+    const doc = await vscode.workspace.document
+    if (!doc) {
+      return
+    }
+    const cursor = await vscode.window.getCursorPosition()
+    if (!cursor) {
+      return
+    }
+    const textDocument = doc.textDocument
+    const c2pConverter = code2ProtocolConverter;
+    // Craft a request by converting vscode params to LSP. The corresponding
+    // response is in LSP.
+    const response = await this.client.sendRequest(GetTcbRequest, {
+      textDocument: c2pConverter.asTextDocumentIdentifier(textDocument),
+      position: cursor,
+    });
+    if (response === null) {
+      return undefined;
+    }
+    const p2cConverter = protocol2CodeConverter;
+    // Convert the response from LSP back to vscode.
+    return {
+      uri: p2cConverter.asUri(response.uri),
+      content: response.content,
+      selections: response.selections || []
+    };
+  }
+
   get initializeResult(): vscode.InitializeResult|undefined {
     return this.client?.initializeResult;
   }
@@ -143,7 +187,6 @@ function registerNotificationHandlers(client: vscode.LanguageClient, context: vs
       '[angularCompilerOptions](https://angular.io/guide/angular-compiler-options).',
       openTsConfig,
     );
-    vscode.window.showMessage(`selection: ${selection}`)
     if (selection === openTsConfig) {
       await vscode.workspace.openResource(params.configFilePath);
     }

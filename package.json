@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "11.1.4",
+  "version": "11.2.1",
   "keywords": [
     "coc.nvim",
     "angular",
@@ -33,6 +33,11 @@
       {
         "command": "angular.openLogFile",
         "title": "Open Angular Server log",
+        "category": "Angular"
+      },
+      {
+        "command": "angular.getTemplateTcb",
+        "title": "View Template Typecheck Block",
         "category": "Angular"
       }
     ],
@@ -71,7 +76,8 @@
         "angular.experimental-ivy": {
           "type": "boolean",
           "default": false,
-          "description": "This is an experimental feature that enables the Ivy language service."
+          "description": "Opt-in to the Ivy language service. Note: To disable the Ivy language service in a workspace when it is enabled in the user settings, open the settings.json file and set the angular.experiment-ivy to false."
+
         },
         "angular.enable-experimental-ivy-prompt": {
           "type": "boolean",
@@ -93,7 +99,7 @@
     "webpack-cli": "^4.4.0"
   },
   "dependencies": {
-    "@angular/language-server": "11.1.3",
-    "typescript": "~4.1.0"
+    "@angular/language-server": "11.2.1",
+    "typescript": "~4.1.5"
   }
 }
