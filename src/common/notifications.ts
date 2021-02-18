@@ -18,3 +18,18 @@ export interface ProjectLanguageServiceParams {
 
 export const ProjectLanguageService =
     new NotificationType<ProjectLanguageServiceParams>('angular/projectLanguageService');
+
+export interface SuggestStrictModeParams {
+  configFilePath: string;
+  message: string;
+}
+
+export const SuggestStrictMode =
+    new NotificationType<SuggestStrictModeParams>('angular/suggestStrictMode');
+
+export interface SuggestIvyLanguageServiceParams {
+  message: string;
+}
+
+export const SuggestIvyLanguageService =
+    new NotificationType<SuggestIvyLanguageServiceParams>('angular/suggestIvyLanguageServiceMode');
