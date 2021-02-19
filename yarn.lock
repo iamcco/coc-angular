@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@angular/language-server@11.2.1":
-  version "11.2.1"
-  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-11.2.1.tgz#a0d8a4cc049f8fdd5fc1d2b7ad278981239c3c80"
-  integrity sha512-hCU4tLrgdboJY+vAHQM0h/XJEEfW6Uxw3rJv3rBvxhaxOcwRYm+DVW7tYwARjkFtpfBMzN0fiz2TOMLYd3gN3Q==
+"@angular/language-server@11.2.2":
+  version "11.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-11.2.2.tgz#410d1c890a3ed92f240d6aba567787f712c6799c"
+  integrity sha512-/phVVq8bcPA+wSVg4VBznTZeRIhw7OBVCDpff5p5gVaARkGSTA75Qf0Tp2ZX5txUwWTfW5EM2prHcTC49B55tw==
   dependencies:
-    "@angular/language-service" "11.2.0"
+    "@angular/language-service" "11.2.1"
     vscode-jsonrpc "6.0.0"
     vscode-languageserver "7.0.0"
     vscode-uri "3.0.2"
 
-"@angular/language-service@11.2.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-11.2.0.tgz#a233129970ccb05dab87093ae9410474a6e92128"
-  integrity sha512-0n7yrBiwpN6qUEDBoMHxEzxRN+w4tIe+42Ra68UQ5leBx5mSA6P6Ipi+nPwy8RXjqNEHgR0D//30Zp18O8UhCA==
+"@angular/language-service@11.2.1":
+  version "11.2.1"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-11.2.1.tgz#527ad4739b35d1cc701026f0033aab0b088c770a"
+  integrity sha512-xJ6UNn3bWWDDfjf7C3F2DXAv8m2LQznxQgsPKdtHbypw5wWDbUVEqFk5sSt81g2TRiFrGYbDa9mChaKx3rttUA==
 
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.2"
@@ -1016,7 +1016,7 @@ vscode-jsonrpc@6.0.0:
   resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-6.0.0.tgz#108bdb09b4400705176b957ceca9e0880e9b6d4e"
   integrity sha512-wnJA4BnEjOSyFMvjZdpiOwhSq9uDoK8e/kpRJDTaMYzwlkrhG1fwDIZI94CLsLzlCK5cIbMMtFlJlfR57Lavmg==
 
-vscode-languageserver-protocol@3.16.0:
+vscode-languageserver-protocol@3.16.0, vscode-languageserver-protocol@^3.16.0:
   version "3.16.0"
   resolved "https://registry.yarnpkg.com/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.16.0.tgz#34135b61a9091db972188a07d337406a3cdbe821"
   integrity sha512-sdeUoAawceQdgIfTI+sdcwkiK2KU+2cbEYA0agzM2uqaUy2UpnnGHtWTHVEtS0ES4zHU0eMFRGN+oQgDxlD66A==
