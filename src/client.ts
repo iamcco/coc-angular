@@ -15,6 +15,7 @@ import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progre
 import {GetTcbRequest} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 
+import {isInsideComponentDecorator, isInsideInlineTemplateRegion} from './embedded_support';
 import {ProgressReporter} from './progress-reporter';
 import {code2ProtocolConverter, protocol2CodeConverter} from './common/utils';
 
@@ -53,7 +54,35 @@ export class AngularLanguageClient implements vscode.Disposable {
       outputChannel: this.outputChannel,
       // middleware
       middleware: {
-        provideCompletionItem
+        provideDefinition: async (
+            document: vscode.TextDocument, position: vscode.Position,
+            token: vscode.CancellationToken, next: vscode.ProvideDefinitionSignature) => {
+          if (isInsideComponentDecorator(document, position)) {
+            return next(document, position, token);
+          }
+        },
+        provideTypeDefinition: async (
+            document: vscode.TextDocument, position: vscode.Position,
+            token: vscode.CancellationToken, next) => {
+          if (isInsideInlineTemplateRegion(document, position)) {
+            return next(document, position, token);
+          }
+        },
+        provideHover: async (
+            document: vscode.TextDocument, position: vscode.Position,
+            token: vscode.CancellationToken, next: vscode.ProvideHoverSignature) => {
+          if (isInsideInlineTemplateRegion(document, position)) {
+            return next(document, position, token);
+          }
+        },
+        provideCompletionItem: async (
+          document: vscode.TextDocument, position: vscode.Position,
+          context: vscode.CompletionContext, token: vscode.CancellationToken,
+          next: vscode.ProvideCompletionItemsSignature) => {
+          if (isInsideInlineTemplateRegion(document, position)) {
+            return provideCompletionItem(document, position, context, token, next);
+          }
+        }
       }
     };
   }
@@ -271,9 +300,8 @@ function getProbeLocations(configValue: string|null, bundled: string): string[] 
 /**
  * Construct the arguments that's used to spawn the server process.
  * @param ctx vscode extension context
- * @param debug true if debug mode is on
  */
-function constructArgs(ctx: vscode.ExtensionContext, debug: boolean): string[] {
+function constructArgs(ctx: vscode.ExtensionContext): string[] {
   const config = vscode.workspace.getConfiguration();
   const args: string[] = ['--logToConsole'];
 
@@ -282,7 +310,7 @@ function constructArgs(ctx: vscode.ExtensionContext, debug: boolean): string[] {
     // Log file does not yet exist on disk. It is up to the server to create the file.
     const logFile = path.join(ctx.storagePath, 'nglangsvc.log');
     args.push('--logFile', logFile);
-    args.push('--logVerbosity', debug ? 'verbose' : ngLog);
+    args.push('--logVerbosity', ngLog);
   }
 
   const ngdk: string|null = config.get('angular.ngdk', null);
@@ -303,10 +331,7 @@ function constructArgs(ctx: vscode.ExtensionContext, debug: boolean): string[] {
 
 function getServerOptions(ctx: vscode.ExtensionContext, debug: boolean): vscode.NodeModule {
   // Environment variables for server process
-  const prodEnv = {
-    // Force TypeScript to use the non-polling version of the file watchers.
-    TSC_NONPOLLING_WATCHER: true,
-  };
+  const prodEnv = {};
   const devEnv = {
     ...prodEnv,
     NG_DEBUG: true,
@@ -330,7 +355,7 @@ function getServerOptions(ctx: vscode.ExtensionContext, debug: boolean): vscode.
     // install prod bundle so we have to check whether dev bundle exists.
     module: debug && fs.existsSync(devBundle) ? devBundle : prodBundle,
     transport: vscode.TransportKind.ipc,
-    args: constructArgs(ctx, debug),
+    args: constructArgs(ctx),
     options: {
       env: debug ? devEnv : prodEnv,
       execArgv: debug ? devExecArgv : prodExecArgv,

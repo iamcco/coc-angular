@@ -59,9 +59,7 @@ function openLogFile(client: AngularLanguageClient): Command {
         if (selection) {
           const isGlobalConfig = false;
           vscode.workspace.getConfiguration().update('angular.log', 'verbose', isGlobalConfig);
-          // Restart the server
-          await client.stop();
-          await client.start();
+          // Server will automatically restart because the config is changed
         }
         return;
       }
