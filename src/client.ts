@@ -207,7 +207,7 @@ function registerNotificationHandlers(client: vscode.LanguageClient, context: vs
   }))
   client.onNotification(SuggestStrictMode, async (params: SuggestStrictModeParams) => {
     const config = vscode.workspace.getConfiguration();
-    if (config.get('angular.enable-strict-template-prompt') === false) {
+    if (config.get('angular.enable-strict-mode-prompt') === false) {
       return;
     }
     const openTsConfig = 'Open tsconfig.json';
@@ -226,7 +226,7 @@ function registerNotificationHandlers(client: vscode.LanguageClient, context: vs
       await vscode.workspace.openResource(params.configFilePath);
     } else if (selection == doNotPromptAgain) {
       config.update(
-        'angular.enable-strict-template-prompt', false, (vscode as any).ConfigurationTarget?.Global);
+        'angular.enable-strict-mode-prompt', false, (vscode as any).ConfigurationTarget?.Global);
     }
   });
 
