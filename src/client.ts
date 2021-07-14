@@ -224,7 +224,7 @@ function registerNotificationHandlers(client: vscode.LanguageClient, context: vs
     );
     if (selection === openTsConfig) {
       await vscode.workspace.openResource(params.configFilePath);
-    }  else if (selection === doNotPromptAgain) {
+    } else if (selection === doNotPromptAgain) {
       config.update(
         'angular.enable-strict-mode-prompt', false, (vscode as any).ConfigurationTarget?.Global);
     }
