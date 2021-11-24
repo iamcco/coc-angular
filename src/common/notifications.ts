@@ -6,10 +6,14 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {NotificationType, NotificationType0} from 'coc.nvim';
+import { NotificationType, NotificationType0 } from "coc.nvim";
 
-export const ProjectLoadingStart = new NotificationType0('angular/projectLoadingStart');
-export const ProjectLoadingFinish = new NotificationType0('angular/projectLoadingFinish');
+export const ProjectLoadingStart = new NotificationType0(
+  "angular/projectLoadingStart"
+);
+export const ProjectLoadingFinish = new NotificationType0(
+  "angular/projectLoadingFinish"
+);
 
 export interface ProjectLanguageServiceParams {
   projectName: string;
@@ -17,19 +21,15 @@ export interface ProjectLanguageServiceParams {
 }
 
 export const ProjectLanguageService =
-    new NotificationType<ProjectLanguageServiceParams>('angular/projectLanguageService');
+  new NotificationType<ProjectLanguageServiceParams>(
+    "angular/projectLanguageService"
+  );
 
 export interface SuggestStrictModeParams {
   configFilePath: string;
   message: string;
 }
 
-export const SuggestStrictMode =
-    new NotificationType<SuggestStrictModeParams>('angular/suggestStrictMode');
-
-export interface SuggestIvyLanguageServiceParams {
-  message: string;
-}
-
-export const SuggestIvyLanguageService =
-    new NotificationType<SuggestIvyLanguageServiceParams>('angular/suggestIvyLanguageServiceMode');
+export const SuggestStrictMode = new NotificationType<SuggestStrictModeParams>(
+  "angular/suggestStrictMode"
+);
