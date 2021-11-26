@@ -33,3 +33,12 @@ export interface GetTcbResponse {
   content: string;
   selections: lsp.Range[]
 }
+
+
+export const IsInAngularProject =
+    new lsp.RequestType<IsInAngularProjectParams, boolean, /* error */ void>(
+        'angular/isAngularCoreInOwningProject');
+
+export interface IsInAngularProjectParams {
+  textDocument: lsp.TextDocumentIdentifier;
+}

@@ -12,7 +12,7 @@ import * as vscode from 'coc.nvim';
 
 import {ProjectLoadingFinish, ProjectLoadingStart, SuggestIvyLanguageService, SuggestIvyLanguageServiceParams, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progress';
-import {GetComponentsWithTemplateFile, GetTcbRequest} from './common/requests';
+import {GetComponentsWithTemplateFile, GetTcbRequest, IsInAngularProject} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 
 import {isInsideComponentDecorator, isInsideInlineTemplateRegion} from './embedded_support';
@@ -35,6 +35,8 @@ export class AngularLanguageClient implements vscode.Disposable {
   private readonly clientOptions: vscode.LanguageClientOptions;
   private readonly name = 'Angular Language Service';
   private readonly virtualDocumentContents = new Map<string, string>();
+  /** A map that indicates whether Angular could be found in the file's project. */
+  private readonly fileToIsInAngularProjectMap = new Map<string, boolean>();
 
   constructor(private readonly context: vscode.ExtensionContext) {
     vscode.workspace.registerTextDocumentContentProvider('angular-embedded-content', {
@@ -67,21 +69,24 @@ export class AngularLanguageClient implements vscode.Disposable {
         provideDefinition: async (
             document: vscode.TextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next: vscode.ProvideDefinitionSignature) => {
-          if (isInsideComponentDecorator(document, position)) {
+          if (await this.isInAngularProject(document) &&
+              isInsideComponentDecorator(document, position)) {
             return next(document, position, token);
           }
         },
         provideTypeDefinition: async (
             document: vscode.TextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next) => {
-          if (isInsideInlineTemplateRegion(document, position)) {
+          if (await this.isInAngularProject(document) &&
+              isInsideInlineTemplateRegion(document, position)) {
             return next(document, position, token);
           }
         },
         provideHover: async (
             document: vscode.TextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next: vscode.ProvideHoverSignature) => {
-          if (!isInsideInlineTemplateRegion(document, position)) {
+          if (!(await this.isInAngularProject(document)) ||
+              !isInsideInlineTemplateRegion(document, position)) {
             return;
           }
           const angularResultsPromise = next(document, position, token);
@@ -99,7 +104,8 @@ export class AngularLanguageClient implements vscode.Disposable {
           context: vscode.CompletionContext, token: vscode.CancellationToken,
           next: vscode.ProvideCompletionItemsSignature) => {
           // If not in inline template, do not perform request forwarding
-          if (!isInsideInlineTemplateRegion(document, position)) {
+          if (!(await this.isInAngularProject(document)) ||
+              !isInsideInlineTemplateRegion(document, position)) {
             return;
           }
           const angularCompletionsPromise = next(document, position, context, token) as
@@ -119,6 +125,26 @@ export class AngularLanguageClient implements vscode.Disposable {
         }
       }
     };
+  }
+
+   private async isInAngularProject(doc: vscode.TextDocument): Promise<boolean> {
+    if (this.client === null) {
+      return false;
+    }
+    const uri = doc.uri.toString();
+    if (this.fileToIsInAngularProjectMap.has(uri)) {
+      return this.fileToIsInAngularProjectMap.get(uri)!;
+    }
+
+    try {
+      const response = await this.client.sendRequest(IsInAngularProject, {
+        textDocument: code2ProtocolConverter.asTextDocumentIdentifier(doc),
+      });
+      this.fileToIsInAngularProjectMap.set(uri, response);
+      return response;
+    } catch {
+      return false;
+    }
   }
 
   private createVirtualHtmlDoc(document: vscode.TextDocument): vscode.Uri {
