@@ -18,6 +18,12 @@
   "engines": {
     "coc": "^0.0.80"
   },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "This extension requires workspace trust because it needs to execute ngcc from the node_modules in the workspace."
+    }
+  },
   "main": "./out/index.js",
   "activationEvents": [
     "workspaceContains:angular.json",
