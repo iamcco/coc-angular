@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v11.2.9
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/8b6e7afaef1b0f04d8deb9087158c5fc9ab5fe37)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v13.0.0
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/aaa01694c82a227f10b1b08714a21d7372ce322f)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -32,20 +32,41 @@ and external templates including:
 ### Configuration
 
 - `angular.trace.server` enable angular language server trace log
-- `angular.ngdk` Specifies the folder path to `@angular/language-service`.
 - `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
-- `angular.experimental-ivy` This is an experimental feature that enables the Ivy language service.
+- `angular.view-engine` Use legacy View Engine language service.
+- `angular.suggest.includeAutomaticOptionalChainCompletions` Enable/disable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled.
+- `angular.suggest.includeCompletionsWithSnippetText` Enable/disable snippet completions from Angular language server. Requires using TypeScript 4.3+ in the workspace and the `legacy View Engine` option to be disabled.
+- `angular.goToComponentWithTemplateFile` go to component
+- `angular.goToTemplateForComponent` go to templates
+
+## Configuring compiler options for the Angular Language Service
+
+The Angular Language Service uses the same set of options that are used to compile the application.
+To get the most complete information in the editor, set the `strictTemplates` option in `tsconfig.json`,
+as shown in the following example:
+
+```
+"angularCompilerOptions": {
+  "strictTemplates": true
+}
+```
+
+For more information, see the [Angular compiler options](https://angular.io/guide/angular-compiler-options) guide.
 
 ## Versioning
 
-The language service extension relies on the `@angular/language-service` and `typescript` packages for its backend. These packages are loaded, in order of priority, from:
+The language service extension relies on the `@angular/language-service` and `typescript` packages
 
-- The path specified by `angular.ngdk` and `typescript.tsdk,` respectively, in project or global settings.
-- *(Recommended)* The version of these packages bundled with the Angular Language Service extension.
-- The version of these packages present in the current workspace's node_modules.
+for its backend. `@angular/language-service` is always bundled with the extension, and is always
+the latest version at the time of the release.
+`typescript` is loaded, in order of priority, from:
 
-We suggest not specifying neither `angular.ngdk` nor `typescript.tsdk` in your VSCode settings per method (1) above.
-If the `@angular/language-service` and typescript packages are loaded by methods (1) or (3), there is a potential
+1. The path specified by `typescript.tsdk` in project or global settings.
+2. _(Recommended)_ The version of `typescript` bundled with the Angular Language Service extension.
+3. The version of `typescript` present in the current workspace's node_modules.
+
+We suggest **not** specifying `typescript.tsdk` in your VSCode settings
+per method (1) above. If the `typescript` package is loaded by methods (1) or (3), there is a potential
 for a mismatch between the API expected by `@angular/language-service` and the API provided by `typescript`.
 This could lead to a failure of the language service extension.
 
