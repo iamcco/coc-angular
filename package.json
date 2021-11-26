@@ -59,14 +59,6 @@
           ],
           "description": "enable angular language server trace log?"
         },
-        "angular.ngdk": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": null,
-          "description": "Specifies the folder path to @angular/language-service."
-        },
         "angular.log": {
           "type": "string",
           "enum": [

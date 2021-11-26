@@ -52,14 +52,18 @@ For more information, see the [Angular compiler options](https://angular.io/guid
 
 ## Versioning
 
-The language service extension relies on the `@angular/language-service` and `typescript` packages for its backend. These packages are loaded, in order of priority, from:
+The language service extension relies on the `@angular/language-service` and `typescript` packages
 
-- The path specified by `angular.ngdk` and `typescript.tsdk,` respectively, in project or global settings.
-- *(Recommended)* The version of these packages bundled with the Angular Language Service extension.
-- The version of these packages present in the current workspace's node_modules.
+for its backend. `@angular/language-service` is always bundled with the extension, and is always
+the latest version at the time of the release.
+`typescript` is loaded, in order of priority, from:
 
-We suggest not specifying neither `angular.ngdk` nor `typescript.tsdk` in your VSCode settings per method (1) above.
-If the `@angular/language-service` and typescript packages are loaded by methods (1) or (3), there is a potential
+1. The path specified by `typescript.tsdk` in project or global settings.
+2. _(Recommended)_ The version of `typescript` bundled with the Angular Language Service extension.
+3. The version of `typescript` present in the current workspace's node_modules.
+
+We suggest **not** specifying `typescript.tsdk` in your VSCode settings
+per method (1) above. If the `typescript` package is loaded by methods (1) or (3), there is a potential
 for a mismatch between the API expected by `@angular/language-service` and the API provided by `typescript`.
 This could lead to a failure of the language service extension.
 
