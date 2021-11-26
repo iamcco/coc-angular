@@ -36,7 +36,7 @@ export interface GetTcbResponse {
 
 
 export const IsInAngularProject =
-    new lsp.RequestType<IsInAngularProjectParams, boolean|undefined, /* error */ void>(
+    new lsp.RequestType<IsInAngularProjectParams, boolean|null, /* error */ void>(
         'angular/isAngularCoreInOwningProject');
 
 export interface IsInAngularProjectParams {
