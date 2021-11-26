@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v11.2.9
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/8b6e7afaef1b0f04d8deb9087158c5fc9ab5fe37)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v13.0.0
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/aaa01694c82a227f10b1b08714a21d7372ce322f)
 
 An angular language service coc extension for (neo)vim 💖
 

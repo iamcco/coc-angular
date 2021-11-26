@@ -109,6 +109,9 @@ function goToComponentWithTemplateFile(ngClient: AngularLanguageClient): Command
     isTextEditorCommand: true,
     async execute() {
       const document = await vscode.workspace.document
+      if (!document || !document.textDocument) {
+        return;
+      }
       const componentLocations = await ngClient.getComponentsForOpenExternalTemplate(document.textDocument);
       if (componentLocations === undefined) {
         return;
@@ -125,9 +128,9 @@ function goToComponentWithTemplateFile(ngClient: AngularLanguageClient): Command
             undefined,
             locations,
         );
-      } else {
+      } else if (locations[0]) {
         await vscode.workspace.openResource(locations[0].uri)
-        await vscode.workspace.selectRange(locations[0].range)
+        await vscode.window.moveTo(locations[0].range.start)
       }
     },
   };
@@ -150,7 +153,6 @@ function goToTemplateForComponent(ngClient: AngularLanguageClient): Command {
       }
 
       await vscode.workspace.openResource(location.uri)
-      await vscode.workspace.selectRange(location.range)
     },
   };
 }

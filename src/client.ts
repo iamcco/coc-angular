@@ -108,16 +108,17 @@ export class AngularLanguageClient implements vscode.Disposable {
           }
           const angularResultsPromise = next(document, position, token);
 
+          // TODO: coc does not provide executeHoverProvider
           // Include results for inline HTML via virtual document and native html providers.
-          if (document.languageId === 'typescript') {
-            const vdocUri = this.createVirtualHtmlDoc(document);
-            const htmlProviderResultsPromise = vscode.commands.executeCommand(
-                'vscode.executeHoverProvider', vdocUri, position);
+          // if (document.languageId === 'typescript') {
+          //   const vdocUri = this.createVirtualHtmlDoc(document);
+          //   const htmlProviderResultsPromise = vscode.commands.executeCommand(
+          //       'vscode.executeHoverProvider', vdocUri, position);
 
-            const [angularResults, htmlProviderResults] =
-                await Promise.all([angularResultsPromise, htmlProviderResultsPromise]);
-            return angularResults ?? htmlProviderResults?.[0];
-          }
+          //   const [angularResults, htmlProviderResults] =
+          //       await Promise.all([angularResultsPromise, htmlProviderResultsPromise]);
+          //   return angularResults ?? htmlProviderResults?.[0];
+          // }
 
           return angularResultsPromise;
         },
@@ -142,19 +143,20 @@ export class AngularLanguageClient implements vscode.Disposable {
           const angularCompletionsPromise = next(document, position, context, token) as
               Promise<vscode.CompletionItem[]|null|undefined>;
 
+          // TODO: coc does not provide executeCompletionItemProvider
           // Include results for inline HTML via virtual document and native html providers.
-          if (document.languageId === 'typescript') {
-            const vdocUri = this.createVirtualHtmlDoc(document);
-            // This will not include angular stuff because the vdoc is not associated with an
-            // angular component
-            const htmlProviderCompletionsPromise =
-                vscode.commands.executeCommand(
-                    'vscode.executeCompletionItemProvider', vdocUri, position,
-                    context.triggerCharacter);
-            const [angularCompletions, htmlProviderCompletions] =
-                await Promise.all([angularCompletionsPromise, htmlProviderCompletionsPromise]);
-            return [...(angularCompletions ?? []), ...(htmlProviderCompletions?.items ?? [])];
-          }
+          // if (document.languageId === 'typescript') {
+          //   const vdocUri = this.createVirtualHtmlDoc(document);
+          //   // This will not include angular stuff because the vdoc is not associated with an
+          //   // angular component
+          //   const htmlProviderCompletionsPromise =
+          //       vscode.commands.executeCommand(
+          //           'vscode.executeCompletionItemProvider', vdocUri, position,
+          //           context.triggerCharacter);
+          //   const [angularCompletions, htmlProviderCompletions] =
+          //       await Promise.all([angularCompletionsPromise, htmlProviderCompletionsPromise]);
+          //   return [...(angularCompletions ?? []), ...(htmlProviderCompletions?.items ?? [])];
+          // }
 
           return angularCompletionsPromise;
         }
@@ -305,14 +307,13 @@ export class AngularLanguageClient implements vscode.Disposable {
     if (this.client === null) {
       return null;
     }
-    const line = await vscode.workspace.nvim.line
-    const select = await vscode.workspace.getSelectedRange('n', document)
+    const position = await vscode.window.getCursorPosition()
     const c2pConverter = code2ProtocolConverter;
     // Craft a request by converting vscode params to LSP. The corresponding
     // response is in LSP.
     const response = await this.client.sendRequest(GetTemplateLocationForComponent, {
       textDocument: c2pConverter.asTextDocumentIdentifier(document.textDocument),
-      position: c2pConverter.asPosition(select?.start || vscode.Position.create(parseFloat(line), 0)),
+      position: c2pConverter.asPosition(position),
     });
     if (response === null) {
       return null;
