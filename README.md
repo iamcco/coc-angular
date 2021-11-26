@@ -32,9 +32,9 @@ and external templates including:
 ### Configuration
 
 - `angular.trace.server` enable angular language server trace log
-- `angular.ngdk` Specifies the folder path to `@angular/language-service`.
 - `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
-- `angular.experimental-ivy` This is an experimental feature that enables the Ivy language service.
+- `angular.view-engine` Use legacy View Engine language service.
+- `angular.suggest.includeAutomaticOptionalChainCompletions` Enable/disable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled.
 
 ## Configuring compiler options for the Angular Language Service
 

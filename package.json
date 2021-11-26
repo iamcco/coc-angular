@@ -85,6 +85,11 @@
           "type": "boolean",
           "default": true,
           "description": "Prompt to enable Strict Mode."
+        },
+        "angular.suggest.includeAutomaticOptionalChainCompletions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled."
         }
       }
     }
@@ -102,7 +107,7 @@
     "webpack-cli": "^4.4.0"
   },
   "dependencies": {
-    "@angular/language-server": "12.0.0",
-    "typescript": "~4.2.4"
+    "@angular/language-server": "12.2.0",
+    "typescript": "~4.3.4"
   }
 }
