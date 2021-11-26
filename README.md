@@ -36,6 +36,20 @@ and external templates including:
 - `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
 - `angular.experimental-ivy` This is an experimental feature that enables the Ivy language service.
 
+## Configuring compiler options for the Angular Language Service
+
+The Angular Language Service uses the same set of options that are used to compile the application.
+To get the most complete information in the editor, set the `strictTemplates` option in `tsconfig.json`,
+as shown in the following example:
+
+```
+"angularCompilerOptions": {
+  "strictTemplates": true
+}
+```
+
+For more information, see the [Angular compiler options](https://angular.io/guide/angular-compiler-options) guide.
+
 ## Versioning
 
 The language service extension relies on the `@angular/language-service` and `typescript` packages for its backend. These packages are loaded, in order of priority, from:
