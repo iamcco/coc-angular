@@ -105,6 +105,6 @@
   },
   "dependencies": {
     "@angular/language-server": "11.2.9",
-    "typescript": "~4.1.5"
+    "typescript": "~4.2.4"
   }
 }
