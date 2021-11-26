@@ -82,6 +82,11 @@
           "type": "boolean",
           "default": true,
           "description": "Prompt to enable the Ivy language service for the workspace when View Engine is in use."
+        },
+        "angular.enable-strict-mode-prompt": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prompt to enable Strict Mode."
         }
       }
     }
