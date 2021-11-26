@@ -95,6 +95,11 @@
           "type": "boolean",
           "default": true,
           "description": "Enable/disable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled."
+        },
+         "angular.suggest.includeCompletionsWithSnippetText": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable/disable snippet completions from Angular language server. Requires using TypeScript 4.3+ in the workspace and the `legacy View Engine` option to be disabled."
         }
       }
     }
@@ -113,6 +118,6 @@
   },
   "dependencies": {
     "@angular/language-server": "12.2.0",
-    "typescript": "~4.3.4"
+    "typescript": "~4.4.3"
   }
 }

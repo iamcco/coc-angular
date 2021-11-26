@@ -35,6 +35,9 @@ and external templates including:
 - `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
 - `angular.view-engine` Use legacy View Engine language service.
 - `angular.suggest.includeAutomaticOptionalChainCompletions` Enable/disable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled.
+- `angular.suggest.includeCompletionsWithSnippetText` Enable/disable snippet completions from Angular language server. Requires using TypeScript 4.3+ in the workspace and the `legacy View Engine` option to be disabled.
+- `angular.goToComponentWithTemplateFile` go to component
+- `angular.goToTemplateForComponent` go to templates
 
 ## Configuring compiler options for the Angular Language Service
 
