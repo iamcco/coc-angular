@@ -1,10 +1,13 @@
-import {Range, TextDocument, Uri} from "coc.nvim";
+import {Position, Range, TextDocument, Uri} from "coc.nvim";
 
 export const code2ProtocolConverter = {
   asTextDocumentIdentifier(td: TextDocument) {
     return {
       uri: td.uri
     }
+  },
+  asPosition(position: Position) {
+    return position
   }
 }
 

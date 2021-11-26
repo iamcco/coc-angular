@@ -50,6 +50,11 @@
         "command": "angular.goToComponentWithTemplateFile",
         "title": "Go to component",
         "category": "Angular"
+      },
+      {
+        "command": "angular.goToTemplateForComponent",
+        "title": "Go to template",
+        "category": "Angular"
       }
     ],
     "configuration": {

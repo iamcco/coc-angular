@@ -134,6 +134,28 @@ function goToComponentWithTemplateFile(ngClient: AngularLanguageClient): Command
 }
 
 /**
+ * Command goToTemplateForComponent finds the template for a component.
+ *
+ * @param ngClient LSP client for the active session
+ */
+function goToTemplateForComponent(ngClient: AngularLanguageClient): Command {
+  return {
+    id: 'angular.goToTemplateForComponent',
+    isTextEditorCommand: true,
+    async execute() {
+      const document = await vscode.workspace.document
+      const location = await ngClient.getTemplateLocationForComponent(document);
+      if (location === null) {
+        return;
+      }
+
+      await vscode.workspace.openResource(location.uri)
+      await vscode.workspace.selectRange(location.range)
+    },
+  };
+}
+
+/**
  * Register all supported vscode commands for the Angular extension.
  * @param client language client
  * @param context extension context for adding disposables
@@ -145,6 +167,7 @@ export function registerCommands(
     openLogFile(client),
     getTemplateTcb(client),
     goToComponentWithTemplateFile(client),
+    goToTemplateForComponent(client),
   ];
 
   for (const command of commands) {

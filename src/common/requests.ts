@@ -20,6 +20,15 @@ export interface GetComponentsWithTemplateFileParams {
 /** An array of locations that represent component declarations. */
 export type GetComponentsWithTemplateFileResponse = Array<{uri: DocumentUri , range: lsp.Range}>;
 
+export const GetTemplateLocationForComponent = new lsp.RequestType<
+    GetTemplateLocationForComponentParams, lsp.Location,
+    /* error */ void>('angular/getTemplateLocationForComponent');
+
+export interface GetTemplateLocationForComponentParams {
+  textDocument: lsp.TextDocumentIdentifier;
+  position: lsp.Position;
+}
+
 export interface GetTcbParams {
   textDocument: lsp.TextDocumentIdentifier;
   position: lsp.Position;

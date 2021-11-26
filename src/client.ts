@@ -12,7 +12,7 @@ import * as vscode from 'coc.nvim';
 
 import {ProjectLoadingFinish, ProjectLoadingStart, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progress';
-import {GetComponentsWithTemplateFile, GetTcbRequest, IsInAngularProject} from './common/requests';
+import {GetComponentsWithTemplateFile, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 import {resolve, Version} from './common/resolver';
 
@@ -298,6 +298,28 @@ export class AngularLanguageClient implements vscode.Disposable {
     }
 
     return response;
+  }
+
+  async getTemplateLocationForComponent(document: vscode.Document):
+      Promise<vscode.Location|null> {
+    if (this.client === null) {
+      return null;
+    }
+    const line = await vscode.workspace.nvim.line
+    const select = await vscode.workspace.getSelectedRange('n', document)
+    const c2pConverter = code2ProtocolConverter;
+    // Craft a request by converting vscode params to LSP. The corresponding
+    // response is in LSP.
+    const response = await this.client.sendRequest(GetTemplateLocationForComponent, {
+      textDocument: c2pConverter.asTextDocumentIdentifier(document.textDocument),
+      position: c2pConverter.asPosition(select?.start || vscode.Position.create(parseFloat(line), 0)),
+    });
+    if (response === null) {
+      return null;
+    }
+    const p2cConverter = protocol2CodeConverter;
+    return vscode.Location.create(
+        p2cConverter.asUri(response.uri).toString(), p2cConverter.asRange(response.range));
   }
 
   dispose() {
