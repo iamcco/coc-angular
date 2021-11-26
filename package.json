@@ -39,6 +39,11 @@
         "command": "angular.getTemplateTcb",
         "title": "View Template Typecheck Block",
         "category": "Angular"
+      },
+      {
+        "command": "angular.goToComponentWithTemplateFile",
+        "title": "Go to component",
+        "category": "Angular"
       }
     ],
     "configuration": {

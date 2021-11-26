@@ -98,6 +98,42 @@ function getTemplateTcb(ngClient: AngularLanguageClient): Command {
 }
 
 /**
+ * Command goToComponentWithTemplateFile finds components which reference an external template in
+ * their `templateUrl`s.
+ *
+ * @param ngClient LSP client for the active session
+ */
+function goToComponentWithTemplateFile(ngClient: AngularLanguageClient): Command {
+  return {
+    id: 'angular.goToComponentWithTemplateFile',
+    isTextEditorCommand: true,
+    async execute() {
+      const document = await vscode.workspace.document
+      const componentLocations = await ngClient.getComponentsForOpenExternalTemplate(document.textDocument);
+      if (componentLocations === undefined) {
+        return;
+      }
+
+      const locations: vscode.Location[] =
+          componentLocations.map(location => vscode.Location.create(location.uri, location.range));
+      // If there is more than one component that references the template, show them all. Otherwise
+      // go to the component immediately.
+      if (locations.length > 1) {
+        vscode.commands.executeCommand(
+            'editor.action.showReferences',
+            document.textDocument.uri,
+            undefined,
+            locations,
+        );
+      } else {
+        await vscode.workspace.openResource(locations[0].uri)
+        await vscode.workspace.selectRange(locations[0].range)
+      }
+    },
+  };
+}
+
+/**
  * Register all supported vscode commands for the Angular extension.
  * @param client language client
  * @param context extension context for adding disposables
@@ -108,6 +144,7 @@ export function registerCommands(
     restartNgServer(client),
     openLogFile(client),
     getTemplateTcb(client),
+    goToComponentWithTemplateFile(client),
   ];
 
   for (const command of commands) {

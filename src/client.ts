@@ -12,18 +12,21 @@ import * as vscode from 'coc.nvim';
 
 import {ProjectLoadingFinish, ProjectLoadingStart, SuggestIvyLanguageService, SuggestIvyLanguageServiceParams, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progress';
-import {GetTcbRequest} from './common/requests';
+import {GetComponentsWithTemplateFile, GetTcbRequest} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 
 import {isInsideComponentDecorator, isInsideInlineTemplateRegion} from './embedded_support';
 import {ProgressReporter} from './progress-reporter';
 import {code2ProtocolConverter, protocol2CodeConverter} from './common/utils';
+import { DocumentUri } from 'vscode-languageserver-protocol';
 
 interface GetTcbResponse {
   uri: vscode.Uri;
   content: string;
   selections: vscode.Range[];
 }
+
+type GetComponentsForOpenExternalTemplateResponse = Array<{uri: DocumentUri; range: vscode.Range;}>;
 
 export class AngularLanguageClient implements vscode.Disposable {
   private client: vscode.LanguageClient|null = null;
@@ -211,6 +214,22 @@ export class AngularLanguageClient implements vscode.Disposable {
 
   get initializeResult(): vscode.InitializeResult|undefined {
     return this.client?.initializeResult;
+  }
+
+  async getComponentsForOpenExternalTemplate(textDocument: vscode.TextDocument):
+      Promise<GetComponentsForOpenExternalTemplateResponse|undefined> {
+    if (this.client === null) {
+      return undefined;
+    }
+
+    const response = await this.client.sendRequest(GetComponentsWithTemplateFile, {
+      textDocument: code2ProtocolConverter.asTextDocumentIdentifier(textDocument),
+    });
+    if (response === undefined) {
+      return undefined;
+    }
+
+    return response;
   }
 
   dispose() {

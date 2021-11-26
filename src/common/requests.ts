@@ -9,6 +9,17 @@
 import { DocumentUri } from 'vscode-languageserver-protocol';
 import * as lsp from 'coc.nvim';
 
+export const GetComponentsWithTemplateFile = new lsp.RequestType<
+    GetComponentsWithTemplateFileParams, GetComponentsWithTemplateFileResponse,
+    /* error */ void>('angular/getComponentsWithTemplateFile');
+
+export interface GetComponentsWithTemplateFileParams {
+  textDocument: lsp.TextDocumentIdentifier;
+}
+
+/** An array of locations that represent component declarations. */
+export type GetComponentsWithTemplateFileResponse = Array<{uri: DocumentUri , range: lsp.Range}>;
+
 export interface GetTcbParams {
   textDocument: lsp.TextDocumentIdentifier;
   position: lsp.Position;
