@@ -10,10 +10,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'coc.nvim';
 
-import {ProjectLoadingFinish, ProjectLoadingStart, SuggestIvyLanguageService, SuggestIvyLanguageServiceParams, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
+import {ProjectLoadingFinish, ProjectLoadingStart, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progress';
 import {GetComponentsWithTemplateFile, GetTcbRequest, IsInAngularProject} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
+import {resolve, Version} from './common/resolver';
 
 import {isInsideComponentDecorator, isInsideInlineTemplateRegion} from './embedded_support';
 import {ProgressReporter} from './progress-reporter';
@@ -332,7 +333,8 @@ function registerProgressHandlers(client: vscode.LanguageClient) {
       client.onProgress(NgccProgressType, NgccProgressToken, async (params: NgccProgress) => {
         const {configFilePath} = params;
         if (!progressReporters.has(configFilePath)) {
-          progressReporters.set(configFilePath, new ProgressReporter());
+          const reporter = new ProgressReporter();
+          progressReporters.set(configFilePath, reporter);
         }
         const reporter = progressReporters.get(configFilePath)!;
         if (params.done) {
@@ -404,7 +406,7 @@ function constructArgs(ctx: vscode.ExtensionContext): string[] {
   const ngProbeLocations = getProbeLocations(ngdk, ctx.extensionPath);
   args.push('--ngProbeLocations', ngProbeLocations.join(','));
 
-  const viewEngine: boolean = config.get('angular.view-engine', false);
+  const viewEngine: boolean = config.get('angular.view-engine', !allProjectsSupportIvy());
   if (viewEngine) {
     args.push('--viewEngine');
   }
@@ -448,4 +450,15 @@ function getServerOptions(ctx: vscode.ExtensionContext, debug: boolean): vscode.
       execArgv: debug ? devExecArgv : prodExecArgv,
     },
   };
+}
+
+function allProjectsSupportIvy() {
+  const workspaceFolders = vscode.workspace.workspaceFolders || [];
+  for (const workspaceFolder of workspaceFolders) {
+    const angularCore = resolve('@angular/core', vscode.Uri.parse(workspaceFolder.uri).fsPath);
+    if (angularCore?.version.greaterThanOrEqual(new Version('9')) === false) {
+      return false;
+    }
+  }
+  return true;
 }
