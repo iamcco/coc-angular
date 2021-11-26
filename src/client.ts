@@ -117,8 +117,8 @@ export class AngularLanguageClient implements vscode.Disposable {
     await this.client.onReady();
     // Must wait for the client to be ready before registering notification
     // handlers.
-    registerNotificationHandlers(this.client, this.context)
-    registerProgressHandlers(this.client, this.context);
+    this.disposables.push(registerNotificationHandlers(this.client));
+    this.disposables.push(registerProgressHandlers(this.client));
   }
 
   /**
@@ -181,7 +181,7 @@ export class AngularLanguageClient implements vscode.Disposable {
   }
 }
 
-function registerNotificationHandlers(client: vscode.LanguageClient, context: vscode.ExtensionContext) {
+function registerNotificationHandlers(client: vscode.LanguageClient) {
   let task: {resolve: () => void}|undefined;
   client.onNotification(ProjectLoadingStart, () => {
     const statusBar = vscode.window.createStatusBarItem(0, { progress: true })
@@ -199,12 +199,12 @@ function registerNotificationHandlers(client: vscode.LanguageClient, context: vs
       task = undefined;
     });
   });
-  context.subscriptions.push(vscode.Disposable.create(() => {
+  const disposable1 = vscode.Disposable.create(() => {
     if (task) {
       task.resolve()
       task = undefined
     }
-  }))
+  })
   client.onNotification(SuggestStrictMode, async (params: SuggestStrictModeParams) => {
     const config = vscode.workspace.getConfiguration();
     if (config.get('angular.enable-strict-mode-prompt') === false) {
@@ -251,9 +251,10 @@ function registerNotificationHandlers(client: vscode.LanguageClient, context: vs
           'angular.enable-experimental-ivy-prompt', false, (vscode as any).ConfigurationTarget?.Global);
       }
     });
+  return disposable1;
 }
 
-function registerProgressHandlers(client: vscode.LanguageClient, context: vscode.ExtensionContext) {
+function registerProgressHandlers(client: vscode.LanguageClient) {
   const progressReporters = new Map<string, ProgressReporter>();
   const disposable =
       client.onProgress(NgccProgressType, NgccProgressToken, async (params: NgccProgress) => {
@@ -280,8 +281,13 @@ function registerProgressHandlers(client: vscode.LanguageClient, context: vscode
           reporter.report(params.message);
         }
       });
-  // Dispose the progress handler on exit
-  context.subscriptions.push(disposable);
+  const reporterDisposer = vscode.Disposable.create(() => {
+    for (const reporter of progressReporters.values()) {
+      reporter.finish();
+    }
+    disposable.dispose();
+  });
+  return reporterDisposer
 }
 
 /**
