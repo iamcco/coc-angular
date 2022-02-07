@@ -12,6 +12,7 @@ import {registerCommands} from './commands';
 
 export function activate(context: vscode.ExtensionContext) {
   const client = new AngularLanguageClient(context);
+  const mutex = new vscode.Mutex()
 
   // Push the disposable to the context's subscriptions so that the
   // client can be deactivated on extension deactivation
@@ -22,8 +23,10 @@ export function activate(context: vscode.ExtensionContext) {
       if (!e.affectsConfiguration('angular')) {
         return;
       }
+      const release = await mutex.acquire();
       await client.stop();
       await client.start();
+      release();
     });
   context.subscriptions.push(client, disposable);
 
