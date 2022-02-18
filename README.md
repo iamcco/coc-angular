@@ -1,7 +1,7 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v13.0.0
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/aaa01694c82a227f10b1b08714a21d7372ce322f)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v13.2.3
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/7c5e894b3211fbf9a34e5ffaa73f329110f48bd4)
 
 An angular language service coc extension for (neo)vim 💖
 
@@ -28,6 +28,8 @@ and external templates including:
 - `angular.restartNgServer` Restart Angular Language server
 - `angular.openLogFile` Open Angular Server log
 - `angular.getTemplateTcb` View Template Typecheck Block
+- `angular.goToComponentWithTemplateFile` go to component
+- `angular.goToTemplateForComponent` go to templates
 
 ### Configuration
 
@@ -36,8 +38,6 @@ and external templates including:
 - `angular.view-engine` Use legacy View Engine language service.
 - `angular.suggest.includeAutomaticOptionalChainCompletions` Enable/disable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled.
 - `angular.suggest.includeCompletionsWithSnippetText` Enable/disable snippet completions from Angular language server. Requires using TypeScript 4.3+ in the workspace and the `legacy View Engine` option to be disabled.
-- `angular.goToComponentWithTemplateFile` go to component
-- `angular.goToTemplateForComponent` go to templates
 
 ## Configuring compiler options for the Angular Language Service
 
