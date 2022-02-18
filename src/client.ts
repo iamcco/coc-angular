@@ -12,7 +12,7 @@ import * as vscode from 'coc.nvim';
 
 import {ProjectLoadingFinish, ProjectLoadingStart, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {NgccProgress, NgccProgressToken, NgccProgressType} from './common/progress';
-import {GetComponentsWithTemplateFile, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject} from './common/requests';
+import {GetCompleteItems, GetComponentsWithTemplateFile, GetHoverInfo, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 import {resolve, Version} from './common/resolver';
 
@@ -108,17 +108,22 @@ export class AngularLanguageClient implements vscode.Disposable {
           }
           const angularResultsPromise = next(document, position, token);
 
-          // TODO: coc does not provide executeHoverProvider
           // Include results for inline HTML via virtual document and native html providers.
-          // if (document.languageId === 'typescript') {
-          //   const vdocUri = this.createVirtualHtmlDoc(document);
-          //   const htmlProviderResultsPromise = vscode.commands.executeCommand(
-          //       'vscode.executeHoverProvider', vdocUri, position);
+          if (document.languageId === 'typescript') {
+            const vDocUri = this.createVirtualHtmlDoc(document);
+            const htmlProviderResultsPromise =  await this.client.sendRequest(
+              GetHoverInfo,
+              {
+                textDocument: {uri: vDocUri.toString()},
+                position
+              },
+              token
+            );
 
-          //   const [angularResults, htmlProviderResults] =
-          //       await Promise.all([angularResultsPromise, htmlProviderResultsPromise]);
-          //   return angularResults ?? htmlProviderResults?.[0];
-          // }
+            const [angularResults, htmlProviderResults] =
+                await Promise.all([angularResultsPromise, htmlProviderResultsPromise]);
+            return angularResults ?? htmlProviderResults?.[0];
+          }
 
           return angularResultsPromise;
         },
@@ -143,20 +148,26 @@ export class AngularLanguageClient implements vscode.Disposable {
           const angularCompletionsPromise = next(document, position, context, token) as
               Promise<vscode.CompletionItem[]|null|undefined>;
 
-          // TODO: coc does not provide executeCompletionItemProvider
           // Include results for inline HTML via virtual document and native html providers.
-          // if (document.languageId === 'typescript') {
-          //   const vdocUri = this.createVirtualHtmlDoc(document);
-          //   // This will not include angular stuff because the vdoc is not associated with an
-          //   // angular component
-          //   const htmlProviderCompletionsPromise =
-          //       vscode.commands.executeCommand(
-          //           'vscode.executeCompletionItemProvider', vdocUri, position,
-          //           context.triggerCharacter);
-          //   const [angularCompletions, htmlProviderCompletions] =
-          //       await Promise.all([angularCompletionsPromise, htmlProviderCompletionsPromise]);
-          //   return [...(angularCompletions ?? []), ...(htmlProviderCompletions?.items ?? [])];
-          // }
+          if (document.languageId === 'typescript') {
+            const vDocUri = this.createVirtualHtmlDoc(document);
+            // This will not include angular stuff because the vDoc is not associated with an
+            // angular component
+            const htmlProviderCompletionsPromise =  await this.client.sendRequest(
+              GetCompleteItems,
+              {
+                textDocument: {uri: vDocUri.toString()},
+                position,
+                context: {
+                  triggerCharacter: context.triggerCharacter
+                }
+              },
+              token
+            );
+            const [angularCompletions, htmlProviderCompletions] =
+                await Promise.all([angularCompletionsPromise, htmlProviderCompletionsPromise]);
+            return [...(angularCompletions ?? []), ...(htmlProviderCompletions?.items ?? [])];
+          }
 
           return angularCompletionsPromise;
         }

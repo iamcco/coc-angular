@@ -51,3 +51,22 @@ export const IsInAngularProject =
 export interface IsInAngularProjectParams {
   textDocument: lsp.TextDocumentIdentifier;
 }
+
+export const GetHoverInfo = new lsp.RequestType<
+  {
+    textDocument: { uri: string },
+    position: lsp.Position
+  },
+  lsp.Hover | null,
+  /* error */ void>('textDocument/hover');
+
+export const GetCompleteItems = new lsp.RequestType<
+  {
+    textDocument: { uri: string },
+    position: lsp.Position,
+    context: {
+      triggerCharacter?: string
+    }
+  },
+  lsp.CompletionList | null,
+  /* error */ void>('textDocument/completion');
