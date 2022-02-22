@@ -297,7 +297,7 @@ export class AngularLanguageClient implements vscode.Disposable {
     const response = await this.client.sendRequest(GetComponentsWithTemplateFile, {
       textDocument: code2ProtocolConverter.asTextDocumentIdentifier(textDocument),
     });
-    if (response === undefined) {
+    if (response === undefined || response === null) {
       return undefined;
     }
 
@@ -520,7 +520,7 @@ function getServerOptions(ctx: vscode.ExtensionContext, debug: boolean): vscode.
   // install prod bundle so we have to check whether dev bundle exists.
   const latestServerModule = debug && fs.existsSync(devBundle) ? devBundle : prodBundle;
   const v12ServerModule = ctx.asAbsolutePath(
-      path.join('v12_language_service', 'node_modules', '@angular', 'language-server'));
+      path.join('node_modules', 'v12_language_service', 'node_modules', '@angular', 'language-server'));
   const module = viewEngine ? v12ServerModule : latestServerModule;
 
   // Argv options for Node.js
