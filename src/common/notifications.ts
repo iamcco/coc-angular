@@ -26,3 +26,5 @@ export interface SuggestStrictModeParams {
 
 export const SuggestStrictMode =
     new NotificationType<SuggestStrictModeParams>('angular/suggestStrictMode');
+
+export const OpenOutputChannel = new NotificationType('angular/OpenOutputChannel');
