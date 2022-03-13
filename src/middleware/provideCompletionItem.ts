@@ -29,7 +29,8 @@ export const provideCompletionItem = async (
         item.textEdit.newText = `${/\(\)$/.test(textEdit.newText) ? textEdit.newText.slice(0, -2) : textEdit.newText}(\${1})\${0}`
       }
     } else if (item.kind === CompletionItemKind.Property && item.detail === 'attribute') {
-      const c = item.textEdit && line[item.textEdit.range.start.character - 1] || line[charCol]
+      const startCharacter = item.textEdit && (item.textEdit.range || (item.textEdit as any).replace) as Range
+      const c = startCharacter && line[startCharacter.start.character - 1] || line[charCol]
       switch(c) {
         case '*':
           /**
