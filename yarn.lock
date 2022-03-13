@@ -32,9 +32,6 @@
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-13.2.2.tgz#4de8742dc7603a331cb39be065f5a30d0bdc0fad"
   integrity sha512-2P5+wRsbHgpI2rVeFwnsLWxyntUiw8kG9Tqh5BkVDqtQovbYtzFiaMkf5TFz/g938JBBgeRQzvXr1kQhEidAWQ==
 
-"@angular/override-rename-ts-plugin@file:override_rename_ts_plugin":
-  version "0.0.1"
-
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.2.tgz#8f03a22a04de437254e8ce8cc84ba39689288752"
