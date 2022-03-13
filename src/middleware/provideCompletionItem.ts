@@ -1,26 +1,10 @@
-import { ProvideCompletionItemsSignature, CompletionContext, TextDocument, Position, CancellationToken, CompletionItem, CompletionItemKind, CompletionList, InsertTextFormat, Range, workspace, window } from 'coc.nvim';
+import { TextDocument, Position, CompletionItem, CompletionItemKind, InsertTextFormat, Range } from 'coc.nvim';
 
 export const provideCompletionItem = async (
   document: TextDocument,
   position: Position,
-  context: CompletionContext,
-  token: CancellationToken,
-  next: ProvideCompletionItemsSignature
+  items: CompletionItem[]
 ) => {
-  const res = await next(document, position, context, token)
-  if (!res) {
-    return res
-  }
-  let items: CompletionItem[] = []
-  let isIncomplete: boolean
-
-  if ((res as CompletionList).isIncomplete !== undefined) {
-    isIncomplete = (res as CompletionList).isIncomplete
-    items = (res as CompletionList).items
-  } else {
-    items = res as CompletionItem[]
-  }
-
   const { line: lineNum, character: colNr } = position
   const line = document.getText(Range.create(
     Position.create(lineNum, 0),
@@ -30,13 +14,19 @@ export const provideCompletionItem = async (
   const nextCharCol = colNr
 
   items = items.map(item => {
-    if (item.kind === CompletionItemKind.Method && item.detail === 'method') {
+    if (item.insertTextFormat === InsertTextFormat.Snippet) {
+      return item
+    } else if (item.kind === CompletionItemKind.Method &&
+      item.detail &&
+      (item.detail === 'method' || item.detail.startsWith('(method)'))
+    ) {
       /**
        * methodName()| => methodName(|)
        */
-      if (item.textEdit && /\(\)$/.test(item.textEdit.newText)) {
+      if (item.textEdit) {
         item.insertTextFormat = InsertTextFormat.Snippet
-        item.textEdit.newText = `${item.textEdit.newText.slice(0, -2)}(\${1})\${0}`
+        const textEdit = item.textEdit
+        item.textEdit.newText = `${/\(\)$/.test(textEdit.newText) ? textEdit.newText.slice(0, -2) : textEdit.newText}(\${1})\${0}`
       }
     } else if (item.kind === CompletionItemKind.Property && item.detail === 'attribute') {
       const c = item.textEdit && line[item.textEdit.range.start.character - 1] || line[charCol]
@@ -108,13 +98,6 @@ export const provideCompletionItem = async (
     }
     return item
   })
-
-  if (isIncomplete !== undefined) {
-    return {
-      isIncomplete,
-      items
-    }
-  }
 
   return items
 };

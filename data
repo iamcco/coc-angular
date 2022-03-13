@@ -1,0 +1,94 @@
+click = {
+  "label": "dblclick",
+  "kind": 10,
+  "detail": "attribute",
+  "sortText": "dblclick",
+  "textEdit": {
+      "range": {
+          "start": {
+              "line": 16,
+              "character": 24
+          },
+          "end": {
+              "line": 16,
+              "character": 24
+          }
+      },
+      "newText": "dblclick"
+  },
+  "data": {
+      "kind": "ngCompletionOriginData",
+      "filePath": "/Users/aioiyuuko/workspaces/anduin/src/app/modules/answer/answer.component.html",
+      "position": {
+          "line": 16,
+          "character": 24
+      }
+  }
+}
+ngif =     {
+        "label": "ngIf",
+        "kind": 10,
+        "detail": "attribute",
+        "sortText": "ngIf",
+        "textEdit": {
+            "range": {
+                "start": {
+                    "line": 16,
+                    "character": 24
+                },
+                "end": {
+                    "line": 16,
+                    "character": 24
+                }
+            },
+            "newText": "ngIf"
+        },
+        "data": {
+            "kind": "ngCompletionOriginData",
+            "filePath": "/Users/aioiyuuko/workspaces/anduin/src/app/modules/answer/answer.component.html",
+            "position": {
+                "line": 16,
+                "character": 24
+            }
+        }
+    },
+
+
+routerlink =     {
+        "label": "routerLink",
+        "kind": 10,
+        "detail": "attribute",
+        "sortText": "routerLink",
+        "textEdit": {
+            "newText": "routerLink",
+            "insert": {
+                "start": {
+                    "line": 16,
+                    "character": 23
+                },
+                "end": {
+                    "line": 16,
+                    "character": 24
+                }
+            },
+            "replace": {
+                "start": {
+                    "line": 16,
+                    "character": 23
+                },
+                "end": {
+                    "line": 16,
+                    "character": 24
+                }
+            }
+        },
+        "data": {
+            "kind": "ngCompletionOriginData",
+            "filePath": "/Users/aioiyuuko/workspaces/anduin/src/app/modules/answer/answer.component.html",
+            "position": {
+                "line": 16,
+                "character": 24
+            }
+        }
+    },
+

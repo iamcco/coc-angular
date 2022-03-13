@@ -169,7 +169,7 @@ export class AngularLanguageClient implements vscode.Disposable {
             return [...(angularCompletions ?? []), ...(htmlProviderCompletions?.items ?? [])];
           }
 
-          return angularCompletionsPromise;
+          return angularCompletionsPromise.then(items => provideCompletionItem(document, position, items));
         }
       }
     };

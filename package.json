@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "13.2.5",
+  "version": "13.2.6",
   "keywords": [
     "coc.nvim",
     "angular",
