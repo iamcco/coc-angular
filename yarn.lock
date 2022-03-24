@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@angular/language-server@13.2.5":
-  version "13.2.5"
-  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-13.2.5.tgz#533cc4777aceb1ae38f9c0facce10fe954892051"
-  integrity sha512-up/Vjg4zkn16INNU6xCVbMdJq1DrQJE6ZJ3IS3FCd758mPvADzsEhWxS4XSJl5DJDZ6Ve0ShtWbFlry08dtbgA==
+"@angular/language-server@13.3.0":
+  version "13.3.0"
+  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-13.3.0.tgz#b6b800290646919f723c1fda6ca37bd3d8999680"
+  integrity sha512-XGca8f4DYhQUIIe2v4lO7ZWN8YpkD+htqKhZBJS1blmoMBn0XN6kIPkSD501Xh3hK36Qvf6+z3rIJ+Gh6Hr9Dw==
   dependencies:
-    "@angular/language-service" "13.2.5"
+    "@angular/language-service" "13.3.0"
     vscode-jsonrpc "6.0.0"
     vscode-languageserver "7.0.0"
     vscode-uri "3.0.3"
 
-"@angular/language-service@13.2.5":
-  version "13.2.5"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-13.2.5.tgz#3304781807e59ebf549af77e70b721d2fe0ab26b"
-  integrity sha512-R50m2nHdsj20/6b09fLEPPd5VkPLfStNaWsN78kQjhJ1G83cvmZdy3grcQNtKjdoA2Mvx/Bp5PyuK12xXXfczw==
+"@angular/language-service@13.3.0":
+  version "13.3.0"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-13.3.0.tgz#366bde21a952ae6ccf2f05659924a583fba01577"
+  integrity sha512-XzfamYk39h+ASxb2ycZKfn9nITmns+jTV+DPrFAY1BoW+4x3tAoqt3/CkdJn8UaCePswKXckDQ6y9i109TfddQ==
 
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.2"
@@ -989,10 +989,10 @@ tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
 
-typescript@~4.4.3:
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
-  integrity sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==
+typescript@~4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
+  integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
 
 uri-js@^4.2.2:
   version "4.2.2"
