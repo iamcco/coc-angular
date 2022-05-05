@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "13.3.4",
+  "version": "13.3.5",
   "keywords": [
     "coc.nvim",
     "angular",
@@ -118,7 +118,7 @@
   },
   "dependencies": {
     "v12_language_service": "file:v12_language_service",
-    "@angular/language-server": "13.3.0",
+    "@angular/language-server": "13.3.2",
     "typescript": "~4.6.2"
   }
 }
