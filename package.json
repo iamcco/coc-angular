@@ -118,7 +118,7 @@
   },
   "dependencies": {
     "v12_language_service": "file:v12_language_service",
-    "@angular/language-server": "13.3.4",
+    "@angular/language-server": "14",
     "typescript": "~4.6.2"
   }
 }
