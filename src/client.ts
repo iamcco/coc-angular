@@ -11,7 +11,7 @@ import * as path from 'path';
 import * as vscode from 'coc.nvim';
 
 import {OpenOutputChannel, ProjectLoadingFinish, ProjectLoadingStart, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
-import {GetCompleteItems, GetComponentsWithTemplateFile, GetHoverInfo, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject} from './common/requests';
+import {GetCompleteItems, GetComponentsWithTemplateFile, GetHoverInfo, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject, RunNgccRequest} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 import {resolve, Version} from './common/resolver';
 
@@ -290,6 +290,16 @@ export class AngularLanguageClient implements vscode.Disposable {
     };
   }
 
+  runNgcc(textDocument: vscode.TextDocument): void {
+    if (this.client === null) {
+      return;
+    }
+    this.client.sendRequest(RunNgccRequest, {
+      textDocument:
+          code2ProtocolConverter.asTextDocumentIdentifier(textDocument),
+    });
+  }
+
   get initializeResult(): vscode.InitializeResult|undefined {
     return this.client?.initializeResult;
   }
@@ -451,9 +461,9 @@ function constructArgs(ctx: vscode.ExtensionContext, viewEngine: boolean): strin
     args.push('--includeCompletionsWithSnippetText');
   }
 
-  const disableNgcc = config.get<boolean>('angular.disableNgcc');
-  if (disableNgcc) {
-    args.push('--disableNgcc');
+  const disableAutomaticNgcc = config.get<boolean>('angular.disableAutomaticNgcc');
+  if (disableAutomaticNgcc) {
+    args.push('--disableAutomaticNgcc');
   }
 
   const tsdk: string|null = config.get('typescript.tsdk', null);
