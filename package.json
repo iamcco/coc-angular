@@ -20,8 +20,12 @@
   },
   "capabilities": {
     "untrustedWorkspaces": {
-      "supported": false,
-      "description": "This extension requires workspace trust because it needs to execute ngcc from the node_modules in the workspace."
+      "supported": "limited",
+      "description": "This extension requires workspace trust because it needs to execute ngcc from the node_modules in the workspace. Projects do not require ngcc if all library dependencies are published with partial-Ivy or Full-Ivy."
+    },
+    "virtualWorkspaces": {
+      "supported": "limited",
+      "description": "The Language Server Protocol does not support remote file systems. Functionality is limited to syntax highlighting only."
     }
   },
   "main": "./out/index.js",
@@ -115,6 +119,11 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Enabling this option will force the language service to use [strictTemplates](https://angular.io/guide/angular-compiler-options#stricttemplates) and ignore the user settings in the `tsconfig.json`."
+        },
+        "angular.trustedWorkspace": {
+          "type": "boolean",
+          "default": null,
+          "markdownDescription": "If is trusted workspace"
         }
       }
     }

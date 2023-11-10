@@ -427,7 +427,8 @@ function getProbeLocations(bundled: string): string[] {
  * Construct the arguments that's used to spawn the server process.
  * @param ctx vscode extension context
  */
-function constructArgs(ctx: vscode.ExtensionContext, viewEngine: boolean): string[] {
+function constructArgs(
+    ctx: vscode.ExtensionContext, viewEngine: boolean, isTrustedWorkspace: boolean): string[] {
   const config = vscode.workspace.getConfiguration();
   const args: string[] = ['--logToConsole'];
 
@@ -472,6 +473,10 @@ function constructArgs(ctx: vscode.ExtensionContext, viewEngine: boolean): strin
     args.push('--forceStrictTemplates');
   }
 
+  if (!isTrustedWorkspace) {
+    args.push('--untrustedWorkspace');
+  }
+
   const tsdk: string|null = config.get('typescript.tsdk', null);
   const tsProbeLocations = [tsdk, ...getProbeLocations(ctx.extensionPath)];
   args.push('--tsProbeLocations', tsProbeLocations.join(','));
@@ -506,8 +511,14 @@ function getServerOptions(ctx: vscode.ExtensionContext, debug: boolean): vscode.
     }
   }
 
+  const trustedWorkspace = config.get<null | boolean>('angular.trustedWorkspace', null);
+  if (trustedWorkspace === null) {
+    const trustedWorkspace = vscode.window.showPrompt("Would you like to trust this workspace? Untrusted workspace will enable limited support. ");
+    vscode.workspace.getConfiguration().update('angular.trustedWorkspace', trustedWorkspace, false);
+  }
+
   // Node module for the language server
-  const args = constructArgs(ctx, viewEngine);
+  const args = constructArgs(ctx, viewEngine, trustedWorkspace /* vscode.workspace.isTrusted */);
   const prodBundle = ctx.asAbsolutePath(path.join('node_modules', '@angular', 'language-server'));
   const devBundle = ctx.asAbsolutePath(path.join('node_modules', '@angular', 'language-server'));
   // VS Code Insider launches extensions in debug mode by default but users
