@@ -65,6 +65,15 @@ export class AngularLanguageClient implements vscode.Disposable {
       outputChannel: this.outputChannel,
       // middleware
       middleware: {
+         provideCodeActions: async (
+             document: vscode.TextDocument, range: vscode.Range, context: vscode.CodeActionContext,
+             token: vscode.CancellationToken, next: vscode.ProvideCodeActionsSignature) => {
+           if (await this.isInAngularProject(document) &&
+               isInsideInlineTemplateRegion(document, range.start) &&
+               isInsideInlineTemplateRegion(document, range.end)) {
+             return next(document, range, context, token);
+           }
+         },
          prepareRename: async (
             document: vscode.TextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next: vscode.PrepareRenameSignature) => {
