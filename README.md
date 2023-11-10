@@ -5,7 +5,7 @@
 
 An angular language service coc extension for (neo)vim 💖
 
-**Note:** require nodejs >= v12 for `view-engine` and nodejs >= v14 for `lvy`
+**Note:** only version <= 13.3.6 support view-engine
 
 ## Install
 
