@@ -20,8 +20,7 @@
   },
   "capabilities": {
     "untrustedWorkspaces": {
-      "supported": "limited",
-      "description": "This extension requires workspace trust because it needs to execute ngcc from the node_modules in the workspace. Projects do not require ngcc if all library dependencies are published with partial-Ivy or Full-Ivy."
+      "supported": true
     },
     "virtualWorkspaces": {
       "supported": "limited",
@@ -58,11 +57,6 @@
       {
         "command": "angular.goToTemplateForComponent",
         "title": "Go to template",
-        "category": "Angular"
-      },
-      {
-        "command": "angular.runNgcc",
-        "title": "Run ngcc",
         "category": "Angular"
       }
     ],
@@ -110,20 +104,10 @@
           "default": true,
           "description": "Enable/disable snippet completions from Angular language server. Requires using TypeScript 4.3+ in the workspace and the `legacy View Engine` option to be disabled."
         },
-        "angular.disableAutomaticNgcc": {
-          "type": "boolean",
-          "default": false,
-          "markdownDescription": "Disable the step to automatically run ngcc. [ngcc](https://github.com/angular/angular/blob/master/packages/compiler/design/architecture.md#high-level-proposal) is required to run and gather metadata from libraries not published with Ivy instructions. This can be run outside of VSCode instead (for example, as part of the build/rebuild in the CLI). Note that ngcc needs to run not only at startup, but also whenever the dependencies change. Failing to run ngcc when required can result in incomplete information and spurious errors reported by the language service."
-        },
         "angular.forceStrictTemplates": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Enabling this option will force the language service to use [strictTemplates](https://angular.io/guide/angular-compiler-options#stricttemplates) and ignore the user settings in the `tsconfig.json`."
-        },
-        "angular.trustedWorkspace": {
-          "type": "boolean",
-          "default": null,
-          "markdownDescription": "If is trusted workspace"
         }
       }
     }

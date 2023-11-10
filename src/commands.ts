@@ -97,20 +97,6 @@ function getTemplateTcb(ngClient: AngularLanguageClient): Command {
   };
 }
 
-function runNgcc(ngClient: AngularLanguageClient): Command {
-  return {
-    id: 'angular.runNgcc',
-    isTextEditorCommand: true,
-    async execute() {
-      const document = await vscode.workspace.document
-      if (!document || !document.textDocument) {
-        return;
-      }
-      ngClient.runNgcc(document.textDocument);
-    }
-  };
-}
-
 /**
  * Command goToComponentWithTemplateFile finds components which reference an external template in
  * their `templateUrl`s.
@@ -182,7 +168,6 @@ export function registerCommands(
     restartNgServer(client),
     openLogFile(client),
     getTemplateTcb(client),
-    runNgcc(client),
     goToComponentWithTemplateFile(client),
     goToTemplateForComponent(client),
   ];

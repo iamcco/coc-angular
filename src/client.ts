@@ -11,7 +11,7 @@ import * as path from 'path';
 import * as vscode from 'coc.nvim';
 
 import {OpenOutputChannel, ProjectLoadingFinish, ProjectLoadingStart, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
-import {GetCompleteItems, GetComponentsWithTemplateFile, GetHoverInfo, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject, RunNgccRequest} from './common/requests';
+import {GetCompleteItems, GetComponentsWithTemplateFile, GetHoverInfo, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject} from './common/requests';
 import {provideCompletionItem} from './middleware/provideCompletionItem';
 import {resolve, Version} from './common/resolver';
 
@@ -307,16 +307,6 @@ export class AngularLanguageClient implements vscode.Disposable {
     };
   }
 
-  runNgcc(textDocument: vscode.TextDocument): void {
-    if (this.client === null) {
-      return;
-    }
-    this.client.sendRequest(RunNgccRequest, {
-      textDocument:
-          code2ProtocolConverter.asTextDocumentIdentifier(textDocument),
-    });
-  }
-
   get initializeResult(): vscode.InitializeResult|undefined {
     return this.client?.initializeResult;
   }
@@ -445,7 +435,7 @@ function getProbeLocations(bundled: string): string[] {
  * @param ctx vscode extension context
  */
 function constructArgs(
-    ctx: vscode.ExtensionContext, viewEngine: boolean, isTrustedWorkspace: boolean): string[] {
+    ctx: vscode.ExtensionContext, viewEngine: boolean): string[] {
   const config = vscode.workspace.getConfiguration();
   const args: string[] = ['--logToConsole'];
 
@@ -480,18 +470,9 @@ function constructArgs(
     args.push('--includeCompletionsWithSnippetText');
   }
 
-  const disableAutomaticNgcc = config.get<boolean>('angular.disableAutomaticNgcc');
-  if (disableAutomaticNgcc) {
-    args.push('--disableAutomaticNgcc');
-  }
-
   const forceStrictTemplates = config.get<boolean>('angular.forceStrictTemplates');
   if (forceStrictTemplates) {
     args.push('--forceStrictTemplates');
-  }
-
-  if (!isTrustedWorkspace) {
-    args.push('--untrustedWorkspace');
   }
 
   const tsdk: string|null = config.get('typescript.tsdk', null);
@@ -535,7 +516,7 @@ function getServerOptions(ctx: vscode.ExtensionContext, debug: boolean): vscode.
   }
 
   // Node module for the language server
-  const args = constructArgs(ctx, viewEngine, trustedWorkspace /* vscode.workspace.isTrusted */);
+  const args = constructArgs(ctx, viewEngine);
   const prodBundle = ctx.asAbsolutePath(path.join('node_modules', '@angular', 'language-server'));
   const devBundle = ctx.asAbsolutePath(path.join('node_modules', '@angular', 'language-server'));
   // VS Code Insider launches extensions in debug mode by default but users
