@@ -485,11 +485,6 @@ function constructArgs(
     args.push('--disableAutomaticNgcc');
   }
 
-  const disableCodeActions = config.get<boolean>('angular.disableCodeActions');
-  if (disableCodeActions) {
-    args.push('--disableCodeActions');
-  }
-
   const forceStrictTemplates = config.get<boolean>('angular.forceStrictTemplates');
   if (forceStrictTemplates) {
     args.push('--forceStrictTemplates');
