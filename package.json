@@ -1,7 +1,7 @@
 {
   "name": "coc-angular",
   "description": "Editor services for Angular templates",
-  "version": "13.3.6",
+  "version": "17.0.1",
   "keywords": [
     "coc.nvim",
     "angular",
@@ -16,7 +16,7 @@
     "url": "https://github.com/iamcco/coc-angular"
   },
   "engines": {
-    "coc": "^0.0.80"
+    "coc": "^0.0.82"
   },
   "capabilities": {
     "untrustedWorkspaces": {
@@ -84,11 +84,6 @@
           "default": "off",
           "description": "Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project."
         },
-        "angular.view-engine": {
-          "type": "boolean",
-          "default": false,
-          "description": "Use legacy View Engine language service. This option is incompatible with projects using Angular v13 and above."
-        },
         "angular.enable-strict-mode-prompt": {
           "type": "boolean",
           "default": true,
@@ -117,15 +112,15 @@
     "watch": "tsc -w -p ./"
   },
   "devDependencies": {
-    "@types/node": "^10.9.4",
-    "coc.nvim": "^0.0.80",
-    "ts-loader": "^8.0.14",
-    "vscode-languageserver-protocol": "^3.16.0",
-    "webpack": "^5.19.0",
-    "webpack-cli": "^4.4.0"
+    "@types/node": "^20.9.0",
+    "coc.nvim": "^0.0.83-next.9",
+    "ts-loader": "^9.5.0",
+    "vscode-languageserver-protocol": "^3.17.5",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@angular/language-server": "13.3.4",
-    "typescript": "~4.6.2"
+    "@angular/language-server": "17.0.1",
+    "typescript": "5.2.2"
   }
 }

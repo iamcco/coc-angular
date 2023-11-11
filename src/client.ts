@@ -13,7 +13,6 @@ import * as vscode from 'coc.nvim';
 import {OpenOutputChannel, ProjectLoadingFinish, ProjectLoadingStart, SuggestStrictMode, SuggestStrictModeParams} from './common/notifications';
 import {GetCompleteItems, GetComponentsWithTemplateFile, GetHoverInfo, GetTcbRequest, GetTemplateLocationForComponent, IsInAngularProject} from './common/requests';
 import {NodeModule, resolve} from './common/resolver';
-import {provideCompletionItem} from './middleware/provideCompletionItem';
 
 import {isInsideComponentDecorator, isInsideInlineTemplateRegion, isInsideStringLiteral} from './embedded_support';
 import {code2ProtocolConverter, protocol2CodeConverter} from './common/utils';
@@ -63,10 +62,13 @@ export class AngularLanguageClient implements vscode.Disposable {
       // Don't let our output console pop open
       revealOutputChannelOn: vscode.RevealOutputChannelOn.Never,
       outputChannel: this.outputChannel,
+      markdown: {
+        isTrusted: true,
+      },
       // middleware
       middleware: {
          provideCodeActions: async (
-             document: vscode.TextDocument, range: vscode.Range, context: vscode.CodeActionContext,
+             document: vscode.LinesTextDocument, range: vscode.Range, context: vscode.CodeActionContext,
              token: vscode.CancellationToken, next: vscode.ProvideCodeActionsSignature) => {
            if (await this.isInAngularProject(document) &&
                isInsideInlineTemplateRegion(document, range.start) &&
@@ -75,7 +77,7 @@ export class AngularLanguageClient implements vscode.Disposable {
            }
          },
          prepareRename: async (
-            document: vscode.TextDocument, position: vscode.Position,
+            document: vscode.LinesTextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next: vscode.PrepareRenameSignature) => {
           // We are able to provide renames for many types of string literals: template strings,
           // pipe names, and hopefully in the future selectors and input/output aliases. Because
@@ -91,7 +93,7 @@ export class AngularLanguageClient implements vscode.Disposable {
           }
         },
         provideDefinition: async (
-            document: vscode.TextDocument, position: vscode.Position,
+            document: vscode.LinesTextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next: vscode.ProvideDefinitionSignature) => {
           if (await this.isInAngularProject(document) &&
               isInsideComponentDecorator(document, position)) {
@@ -99,7 +101,7 @@ export class AngularLanguageClient implements vscode.Disposable {
           }
         },
         provideTypeDefinition: async (
-            document: vscode.TextDocument, position: vscode.Position,
+            document: vscode.LinesTextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next) => {
           if (await this.isInAngularProject(document) &&
               isInsideInlineTemplateRegion(document, position)) {
@@ -107,7 +109,7 @@ export class AngularLanguageClient implements vscode.Disposable {
           }
         },
         provideHover: async (
-            document: vscode.TextDocument, position: vscode.Position,
+            document: vscode.LinesTextDocument, position: vscode.Position,
             token: vscode.CancellationToken, next: vscode.ProvideHoverSignature) => {
           if (!(await this.isInAngularProject(document)) ||
               !isInsideInlineTemplateRegion(document, position)) {
@@ -135,7 +137,7 @@ export class AngularLanguageClient implements vscode.Disposable {
           return angularResultsPromise;
         },
         provideSignatureHelp: async (
-            document: vscode.TextDocument, position: vscode.Position,
+            document: vscode.LinesTextDocument, position: vscode.Position,
             context: vscode.SignatureHelpContext, token: vscode.CancellationToken,
             next: vscode.ProvideSignatureHelpSignature) => {
           if (await this.isInAngularProject(document) &&
@@ -144,7 +146,7 @@ export class AngularLanguageClient implements vscode.Disposable {
           }
         },
         provideCompletionItem: async (
-          document: vscode.TextDocument, position: vscode.Position,
+          document: vscode.LinesTextDocument, position: vscode.Position,
           context: vscode.CompletionContext, token: vscode.CancellationToken,
           next: vscode.ProvideCompletionItemsSignature) => {
           // If not in inline template, do not perform request forwarding
@@ -176,10 +178,10 @@ export class AngularLanguageClient implements vscode.Disposable {
             return [...(angularCompletions ?? []), ...(htmlProviderCompletions?.items ?? [])];
           }
 
-          return angularCompletionsPromise.then(items => provideCompletionItem(document, position, items ?? []));
+          return angularCompletionsPromise;
         },
         provideFoldingRanges: async (
-            document: vscode.TextDocument, context: vscode.FoldingContext,
+            document: vscode.LinesTextDocument, context: vscode.FoldingContext,
             token: vscode.CancellationToken, next) => {
           if (!await this.isInAngularProject(document)) {
             return null;
@@ -249,7 +251,7 @@ export class AngularLanguageClient implements vscode.Disposable {
         this.clientOptions,
         forceDebug,
     );
-    this.disposables.push(this.client.start());
+    vscode.services.registerLanguageClient(this.client);
     await this.client.onReady();
     // Must wait for the client to be ready before registering notification
     // handlers.
