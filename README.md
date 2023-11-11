@@ -1,11 +1,11 @@
 # Angular Language Service
 
-> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v13.3.4
-> [commit](https://github.com/angular/vscode-ng-language-service/commit/6d1a664e05ec569d96afdcfc871acb176e8ff846)
+> fork from [angular/vscode-ng-language-service](https://github.com/angular/vscode-ng-language-service) v17.0.1
+> [commit](https://github.com/angular/vscode-ng-language-service/commit/1dd740af951782d8ae19420bc553dee305b02eac)
 
 An angular language service coc extension for (neo)vim 💖
 
-**Note:** require nodejs >= v12 for `view-engine` and nodejs >= v14 for `lvy`
+**Note:** only version <= 13.3.6 support view-engine
 
 ## Install
 
@@ -39,7 +39,6 @@ and external templates including:
 
 - `angular.trace.server` enable angular language server trace log
 - `angular.log` Enables logging of the Angular server to a file. This log can be used to diagnose Angular Server issues. The log may contain file paths, source code, and other potentially sensitive information from your project.
-- `angular.view-engine` Use legacy View Engine language service.
 - `angular.suggest.includeAutomaticOptionalChainCompletions` Enable/disable showing completions on potentially undefined values that insert an optional chain call. Requires TS 3.7+ and strict null checks to be enabled.
 - `angular.suggest.includeCompletionsWithSnippetText` Enable/disable snippet completions from Angular language server. Requires using TypeScript 4.3+ in the workspace and the `legacy View Engine` option to be disabled.
 
