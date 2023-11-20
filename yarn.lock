@@ -2,22 +2,22 @@
 # yarn lockfile v1
 
 
-"@angular/language-server@17.0.1":
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-17.0.1.tgz#40d3fcd898f3aa73ed9d3135fe1937e6a3d42584"
-  integrity sha512-H53o2CLiEle5b6PPy5y31iRVCcyliT7zQD1C9OJ2NWkJSIGPDV7JxmGCZ253iu2j7Kbf5b/GTOH13h6LypyNDw==
+"@angular/language-server@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/language-server/-/language-server-17.0.2.tgz#7b16c6b99089013ce96da8fcc00f2744a62ac6b8"
+  integrity sha512-ESDLPJlBIimYm+eqfPAZbaNGvmdKSTRHhoWIngPD6RSIWh+XWKcMXNycL9egmPZqU/PU+/x9yoNXqevYmIRNjg==
   dependencies:
-    "@angular/language-service" "17.0.1"
+    "@angular/language-service" "17.0.2"
     vscode-html-languageservice "^4.2.5"
     vscode-jsonrpc "6.0.0"
     vscode-languageserver "7.0.0"
     vscode-languageserver-textdocument "^1.0.7"
     vscode-uri "3.0.7"
 
-"@angular/language-service@17.0.1":
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-17.0.1.tgz#3e08a65a1f02f5fe39e454819729f5ec20259d35"
-  integrity sha512-kDKmtMj410We8Rbph4e2xSuIs+MlzE7+QvIR07tofcoAR6Qpe2hr6WdsfExGBNIk5LNMYI3zdbEkAofG/JuRDA==
+"@angular/language-service@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-17.0.2.tgz#0fc6f2bb8c899392971ee1c29736e8b9ee601015"
+  integrity sha512-A1roy4uqnPSUQ5IE/zOHSOj128u1b+cuzQkLtwTTjb5m0Y32GOhQeZgIQAt4mtuGnts27sgIFo1OQzK7J4DnIw==
 
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.2"
