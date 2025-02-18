@@ -6,23 +6,29 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { DocumentUri } from 'vscode-languageserver-protocol';
-import * as lsp from 'coc.nvim';
+import * as lsp from "coc.nvim";
 
 export const GetComponentsWithTemplateFile = new lsp.RequestType<
-    GetComponentsWithTemplateFileParams, GetComponentsWithTemplateFileResponse,
-    /* error */ void>('angular/getComponentsWithTemplateFile');
+  GetComponentsWithTemplateFileParams,
+  GetComponentsWithTemplateFileResponse,
+  /* error */ void
+>("angular/getComponentsWithTemplateFile");
 
 export interface GetComponentsWithTemplateFileParams {
   textDocument: lsp.TextDocumentIdentifier;
 }
 
 /** An array of locations that represent component declarations. */
-export type GetComponentsWithTemplateFileResponse = Array<{uri: DocumentUri , range: lsp.Range}>;
+export type GetComponentsWithTemplateFileResponse = Array<{
+  uri: lsp.Uri;
+  range: lsp.Range;
+}>;
 
 export const GetTemplateLocationForComponent = new lsp.RequestType<
-    GetTemplateLocationForComponentParams, lsp.Location,
-    /* error */ void>('angular/getTemplateLocationForComponent');
+  GetTemplateLocationForComponentParams,
+  lsp.Location,
+  /* error */ void
+>("angular/getTemplateLocationForComponent");
 
 export interface GetTemplateLocationForComponentParams {
   textDocument: lsp.TextDocumentIdentifier;
@@ -34,19 +40,23 @@ export interface GetTcbParams {
   position: lsp.Position;
 }
 
-export const GetTcbRequest =
-  new lsp.RequestType<GetTcbParams, GetTcbResponse|null, /* error */ void>('angular/getTcb');
+export const GetTcbRequest = new lsp.RequestType<
+  GetTcbParams,
+  GetTcbResponse | null,
+  /* error */ void
+>("angular/getTcb");
 
 export interface GetTcbResponse {
-  uri: DocumentUri;
+  uri: lsp.Uri;
   content: string;
-  selections: lsp.Range[]
+  selections: lsp.Range[];
 }
 
-
-export const IsInAngularProject =
-    new lsp.RequestType<IsInAngularProjectParams, boolean|null, /* error */ void>(
-        'angular/isAngularCoreInOwningProject');
+export const IsInAngularProject = new lsp.RequestType<
+  IsInAngularProjectParams,
+  boolean | null,
+  /* error */ void
+>("angular/isAngularCoreInOwningProject");
 
 export interface IsInAngularProjectParams {
   textDocument: lsp.TextDocumentIdentifier;
@@ -54,19 +64,21 @@ export interface IsInAngularProjectParams {
 
 export const GetHoverInfo = new lsp.RequestType<
   {
-    textDocument: { uri: string },
-    position: lsp.Position
+    textDocument: { uri: string };
+    position: lsp.Position;
   },
   lsp.Hover | null,
-  /* error */ void>('textDocument/hover');
+  /* error */ void
+>("textDocument/hover");
 
 export const GetCompleteItems = new lsp.RequestType<
   {
-    textDocument: { uri: string },
-    position: lsp.Position,
+    textDocument: { uri: string };
+    position: lsp.Position;
     context: {
-      triggerCharacter?: string
-    }
+      triggerCharacter?: string;
+    };
   },
   lsp.CompletionList | null,
-  /* error */ void>('textDocument/completion');
+  /* error */ void
+>("textDocument/completion");
